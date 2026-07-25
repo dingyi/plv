@@ -7,13 +7,11 @@ import VideoSearch, {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 
 interface Props {
-  active?: "discover" | "about";
+  active?: "discover" | "about" | "submit";
   homeSearch?: boolean;
   onSearch?: () => void;
 }
@@ -24,7 +22,6 @@ export default function PageHeader({
   onSearch,
 }: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [submitOpen, setSubmitOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchItems, setSearchItems] = useState<VideoSearchItem[]>([]);
@@ -38,7 +35,6 @@ export default function PageHeader({
 
   useEffect(() => {
     setReady(true);
-    const showSubmitNotice = () => setSubmitOpen(true);
     const openSearchShortcut = (event: KeyboardEvent) => {
       if (!(event.metaKey || event.ctrlKey) || event.key.toLowerCase() !== "k")
         return;
@@ -51,10 +47,8 @@ export default function PageHeader({
       event.preventDefault();
       openSearch();
     };
-    window.addEventListener("plv-submit", showSubmitNotice);
     window.addEventListener("keydown", openSearchShortcut);
     return () => {
-      window.removeEventListener("plv-submit", showSubmitNotice);
       window.removeEventListener("keydown", openSearchShortcut);
     };
   }, [openSearch]);
@@ -120,13 +114,13 @@ export default function PageHeader({
             </kbd>
           </button>
           <div className="nav-right">
-            <button
-              className="nav-submit"
-              type="button"
-              onClick={() => setSubmitOpen(true)}
+            <a
+              className={`nav-submit${active === "submit" ? " is-current" : ""}`}
+              href="/submit/"
+              aria-current={active === "submit" ? "page" : undefined}
             >
               Submit
-            </button>
+            </a>
             <button
               className="mobile-menu-button"
               type="button"
@@ -153,9 +147,13 @@ export default function PageHeader({
               >
                 About
               </a>
-              <button type="button" onClick={() => setSubmitOpen(true)}>
+              <a
+                className={active === "submit" ? "is-active" : ""}
+                href="/submit/"
+                aria-current={active === "submit" ? "page" : undefined}
+              >
                 Submit
-              </button>
+              </a>
             </nav>
           )}
         </nav>
@@ -171,20 +169,6 @@ export default function PageHeader({
             onClose={() => setSearchOpen(false)}
             loading={searchLoading}
           />
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={submitOpen} onOpenChange={setSubmitOpen}>
-        <DialogContent className="notice-dialog">
-          <DialogHeader>
-            <DialogTitle>Submissions are opening soon.</DialogTitle>
-            <DialogDescription>
-              For now, launches are curated into{" "}
-              <code>src/data/videos.json</code>. A public submit form will
-              land once review tooling is ready. Nothing is stored when you
-              close this notice.
-            </DialogDescription>
-          </DialogHeader>
         </DialogContent>
       </Dialog>
     </>

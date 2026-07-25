@@ -25,7 +25,7 @@ A distinct action that opens the source X post in a new tab without navigating t
 _Avoid_: in-app Twitter embed as the only path
 
 **Submission**:
-A future visitor-contributed candidate. In the MVP, Submit only surfaces an availability notice.
+A visitor-proposed Launch Video collected on `/submit/` and packaged as a GitHub issue for editorial review before becoming a Published Video.
 _Avoid_: unmoderated public write API
 
 ## Product goals

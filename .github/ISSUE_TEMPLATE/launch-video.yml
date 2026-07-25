@@ -1,0 +1,56 @@
+name: Launch video submission
+description: Propose a product launch video from X for the directory
+title: "Launch video: "
+labels: ["submission"]
+body:
+  - type: input
+    id: tweet_url
+    attributes:
+      label: X / Twitter post URL
+      placeholder: https://x.com/handle/status/123…
+    validations:
+      required: true
+  - type: input
+    id: product
+    attributes:
+      label: Product name
+    validations:
+      required: true
+  - type: input
+    id: company
+    attributes:
+      label: Company / publisher
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - AI
+        - Developer tools
+        - Design
+        - Productivity
+        - Consumer
+        - Hardware
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What does the launch video show?
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes for editors
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checks
+      options:
+        - label: The post is public and contains a product launch / demo video
+          required: true
+        - label: I understand submissions are reviewed before publishing
+          required: true

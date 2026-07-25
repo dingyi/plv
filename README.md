@@ -46,7 +46,7 @@ Detail pages embed the original post via X’s oEmbed API during `pnpm build`. I
 
 ## Submissions
 
-The MVP Submit button shows an “opening soon” notice. Curation is manual via JSON. A public submit + review flow is planned once the catalog shape stabilizes.
+Open `/submit/` to propose a launch. The form validates an X status URL and product metadata, then opens a prefilled GitHub issue on `dingyi/plv` for editorial review. Approved entries are merged into `src/data/videos.json`.
 
 ## Stack
 

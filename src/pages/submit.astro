@@ -1,0 +1,17 @@
+---
+import PageHeader from "@/components/PageHeader";
+import SiteFooter from "@/components/SiteFooter.astro";
+import SubmitForm from "@/components/SubmitForm";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Submit — Product Launch Videos"
+  description="Submit a product launch video from X for review on Product Launch Videos."
+>
+  <PageHeader active="submit" client:load />
+  <main class="submit-page">
+    <SubmitForm client:load />
+  </main>
+  <SiteFooter />
+</BaseLayout>
