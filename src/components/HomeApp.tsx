@@ -9,6 +9,7 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 import PageHeader from "@/components/PageHeader";
+import VideoPlayerDialog from "@/components/VideoPlayerDialog";
 import VideoSearch, {
   type VideoSearchItem,
 } from "@/components/VideoSearch";
@@ -45,43 +46,43 @@ interface Props {
 
 type View = "card" | "list";
 
-function VideoCard({ video, view }: { video: LaunchVideo; view: View }) {
+function VideoCard({
+  video,
+  view,
+  onPlay,
+}: {
+  video: LaunchVideo;
+  view: View;
+  onPlay: (video: LaunchVideo) => void;
+}) {
   const duration = formatDuration(video.durationSeconds);
+
+  function rememberReturn() {
+    window.history.replaceState(
+      {
+        ...(window.history.state ?? {}),
+        plvReturn: {
+          slug: video.slug,
+          scrollY: window.scrollY,
+        },
+      },
+      "",
+      window.location.href,
+    );
+  }
 
   return (
     <article className={`video-card video-card--${view}`}>
-      <a
-        className="video-card__main"
-        href={`/videos/${video.slug}/`}
-        aria-label={`View ${video.title}`}
-        data-video-slug={video.slug}
-        onClick={(event) => {
-          if (
-            event.button !== 0 ||
-            event.metaKey ||
-            event.ctrlKey ||
-            event.shiftKey ||
-            event.altKey
-          )
-            return;
-
-          window.history.replaceState(
-            {
-              ...(window.history.state ?? {}),
-              plvReturn: {
-                slug: video.slug,
-                scrollY: window.scrollY,
-              },
-            },
-            "",
-            window.location.href,
-          );
-        }}
-      >
-        <div className="video-card__media">
+      <div className="video-card__main" data-video-slug={video.slug}>
+        <button
+          type="button"
+          className="video-card__media"
+          onClick={() => onPlay(video)}
+          aria-label={`Play ${video.title}`}
+        >
           <img
             src={video.poster}
-            alt={`Poster for ${video.title}`}
+            alt=""
             loading="lazy"
             width="1440"
             height="810"
@@ -92,10 +93,27 @@ function VideoCard({ video, view }: { video: LaunchVideo; view: View }) {
           {duration && (
             <span className="video-card__duration">{duration}</span>
           )}
-        </div>
+        </button>
         <div className="video-card__body">
           <div>
-            <h2>{video.title}</h2>
+            <h2>
+              <a
+                href={`/videos/${video.slug}/`}
+                onClick={(event) => {
+                  if (
+                    event.button !== 0 ||
+                    event.metaKey ||
+                    event.ctrlKey ||
+                    event.shiftKey ||
+                    event.altKey
+                  )
+                    return;
+                  rememberReturn();
+                }}
+              >
+                {video.title}
+              </a>
+            </h2>
             <p className="video-card__meta">
               {video.company}
               <span aria-hidden="true"> · </span>
@@ -108,7 +126,7 @@ function VideoCard({ video, view }: { video: LaunchVideo; view: View }) {
             <p className="video-card__description">{video.description}</p>
           )}
         </div>
-      </a>
+      </div>
       <a
         className="video-card__external"
         href={video.tweetUrl}
@@ -130,6 +148,7 @@ export default function HomeApp({ videos }: Props) {
   const [page, setPage] = useState(1);
   const [searchOpen, setSearchOpen] = useState(false);
   const [newsletterOpen, setNewsletterOpen] = useState(false);
+  const [playingVideo, setPlayingVideo] = useState<LaunchVideo | null>(null);
   const [ready, setReady] = useState(false);
 
   const searchItems = useMemo<VideoSearchItem[]>(
@@ -369,7 +388,12 @@ export default function HomeApp({ videos }: Props) {
           {visible.length ? (
             <div className={`video-grid video-grid--${view}`}>
               {visible.map((video) => (
-                <VideoCard video={video} view={view} key={video.id} />
+                <VideoCard
+                  video={video}
+                  view={view}
+                  key={video.id}
+                  onPlay={setPlayingVideo}
+                />
               ))}
             </div>
           ) : (
@@ -452,6 +476,13 @@ export default function HomeApp({ videos }: Props) {
           </DialogDescription>
         </DialogContent>
       </Dialog>
+      <VideoPlayerDialog
+        video={playingVideo}
+        open={Boolean(playingVideo)}
+        onOpenChange={(open) => {
+          if (!open) setPlayingVideo(null);
+        }}
+      />
     </>
   );
 }

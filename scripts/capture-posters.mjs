@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Capture 16:9 WebP posters from Launch Video amplify MP4 sources.
+ * Capture 16:9 WebP posters and compressed same-origin streams from amplify MP4s.
  *
  * Usage:
  *   node scripts/capture-posters.mjs
@@ -14,6 +14,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const videosPath = path.join(root, "src/data/videos.json");
 const postersDir = path.join(root, "public/posters");
+const streamsDir = path.join(root, "public/streams");
 const tmpDir = path.join(root, ".tmp/poster-capture");
 
 const args = new Set(process.argv.slice(2));
@@ -41,7 +42,7 @@ async function exists(filePath) {
   }
 }
 
-async function capturePoster(video) {
+async function capture(video) {
   if (!video.videoUrl) {
     console.log(`skip ${video.slug}: no videoUrl`);
     return;
@@ -51,12 +52,17 @@ async function capturePoster(video) {
     ? video.poster.slice(1)
     : video.poster;
   const posterAbs = path.join(root, "public", posterRel.replace(/^public\//, ""));
-  if (!force && (await exists(posterAbs))) {
-    console.log(`keep ${video.slug}: ${posterRel}`);
+  const streamAbs = path.join(streamsDir, `${video.slug}.mp4`);
+
+  const needPoster = force || !(await exists(posterAbs));
+  const needStream = force || !(await exists(streamAbs));
+  if (!needPoster && !needStream) {
+    console.log(`keep ${video.slug}`);
     return;
   }
 
   await mkdir(path.dirname(posterAbs), { recursive: true });
+  await mkdir(streamsDir, { recursive: true });
   await mkdir(tmpDir, { recursive: true });
   const tmpMp4 = path.join(tmpDir, `${video.slug}.mp4`);
 
@@ -64,34 +70,62 @@ async function capturePoster(video) {
   await run("curl", [
     "-fsSL",
     "--max-time",
-    "90",
+    "300",
+    "-A",
+    "Mozilla/5.0",
     "-o",
     tmpMp4,
     video.videoUrl,
   ]);
 
-  // Seek a short way in so we avoid pure black title cards when possible.
-  const seek =
-    video.durationSeconds && video.durationSeconds > 6 ? "00:00:02.5" : "00:00:00.8";
+  if (needPoster) {
+    const seek =
+      video.durationSeconds && video.durationSeconds > 6
+        ? "00:00:02.5"
+        : "00:00:00.8";
+    console.log(`poster ${video.slug} @ ${seek}`);
+    await run("ffmpeg", [
+      "-y",
+      "-ss",
+      seek,
+      "-i",
+      tmpMp4,
+      "-frames:v",
+      "1",
+      "-vf",
+      "scale=1440:810:force_original_aspect_ratio=increase,crop=1440:810",
+      "-c:v",
+      "libwebp",
+      "-quality",
+      "82",
+      posterAbs,
+    ]);
+  }
 
-  console.log(`frame ${video.slug} @ ${seek}`);
-  await run("ffmpeg", [
-    "-y",
-    "-ss",
-    seek,
-    "-i",
-    tmpMp4,
-    "-frames:v",
-    "1",
-    "-vf",
-    "scale=1440:810:force_original_aspect_ratio=increase,crop=1440:810",
-    "-c:v",
-    "libwebp",
-    "-quality",
-    "82",
-    posterAbs,
-  ]);
-  console.log(`wrote ${posterRel}`);
+  if (needStream) {
+    console.log(`stream ${video.slug}`);
+    // Re-encode a lean progressive MP4 for reliable same-origin playback.
+    await run("ffmpeg", [
+      "-y",
+      "-i",
+      tmpMp4,
+      "-vf",
+      "scale='min(1280,iw)':-2",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "veryfast",
+      "-crf",
+      "28",
+      "-c:a",
+      "aac",
+      "-b:a",
+      "96k",
+      "-movflags",
+      "+faststart",
+      streamAbs,
+    ]);
+  }
 }
 
 const videos = JSON.parse(await readFile(videosPath, "utf8"));
@@ -105,10 +139,11 @@ if (!targets.length) {
 }
 
 await mkdir(postersDir, { recursive: true });
+await mkdir(streamsDir, { recursive: true });
 
 for (const video of targets) {
   try {
-    await capturePoster(video);
+    await capture(video);
   } catch (error) {
     console.error(`failed ${video.slug}:`, error.message ?? error);
   }

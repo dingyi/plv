@@ -22,7 +22,7 @@ Open [http://localhost:4321](http://localhost:4321).
 | `pnpm preview` | Preview the production build |
 | `pnpm check` | Astro + TypeScript check |
 | `pnpm test:run` | Unit tests (Vitest) |
-| `pnpm posters:capture` | Download amplify MP4s and extract 16:9 WebP posters |
+| `pnpm posters:capture` | Download amplify MP4s, extract posters, and build same-origin `/streams` for in-site playback |
 
 ## Adding curated videos
 
@@ -36,11 +36,13 @@ Edit `src/data/videos.json`. Each published entry needs:
 - `poster` path under `public/posters/`
 - `status: "published"` (drafts stay offline)
 
-After adding a `videoUrl`, capture the poster:
+After adding a `videoUrl`, capture the poster and local stream:
 
 ```bash
 pnpm posters:capture -- --slug=your-slug --force
 ```
+
+Homepage playback uses same-origin files under `public/streams/{slug}.mp4`. Direct X CDN hotlinking is blocked for non-Twitter referers (including localhost), so local streams are required for in-site play.
 
 Detail pages embed the original post via X’s oEmbed API during `pnpm build`. If oEmbed fails, the page falls back to the local poster plus a Watch on X link.
 

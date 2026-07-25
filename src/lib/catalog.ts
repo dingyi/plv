@@ -28,8 +28,16 @@ export interface LaunchVideo {
   authorAvatar: string | null;
   /** Local 16:9 poster under /public */
   poster: string;
-  /** Optional amplify MP4 used only for poster capture scripts */
+  /**
+   * Optional amplify MP4 used for poster/stream capture scripts.
+   * Not used for browser playback (X CDN blocks non-Twitter referers).
+   */
   videoUrl: string | null;
+  /**
+   * Preferred same-origin progressive stream under /public/streams.
+   * When omitted, players fall back to `/streams/{slug}.mp4`.
+   */
+  streamUrl?: string | null;
   publishedAt: string;
   durationSeconds: number | null;
   featured: boolean;
@@ -74,6 +82,12 @@ export function tweetPath(video: LaunchVideo) {
 
 export function xProfileUrl(handle: string) {
   return `https://x.com/${handle.replace(/^@/, "")}`;
+}
+
+/** Same-origin stream path used for in-site HTML5 playback. */
+export function playbackUrl(video: LaunchVideo) {
+  if (video.streamUrl) return video.streamUrl;
+  return `/streams/${video.slug}.mp4`;
 }
 
 export function normalizeTweetUrl(url: string) {
