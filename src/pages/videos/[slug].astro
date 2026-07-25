@@ -1,0 +1,289 @@
+---
+import { ArrowUpRight, Play } from "lucide-react";
+import PageHeader from "@/components/PageHeader";
+import SiteFooter from "@/components/SiteFooter.astro";
+import TweetEmbed from "@/components/TweetEmbed.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  categoryLabel,
+  formatDuration,
+  formatPublishedAt,
+  getSimilarVideos,
+  normalizeTweetUrl,
+  publishedVideos,
+  type LaunchVideo,
+  xProfileUrl,
+} from "@/lib/catalog";
+import { fetchTweetOEmbed } from "@/lib/oembed";
+
+export async function getStaticPaths() {
+  const total = publishedVideos.length;
+
+  return await Promise.all(
+    publishedVideos.map(async (video, index) => {
+      const oembed = await fetchTweetOEmbed(normalizeTweetUrl(video.tweetUrl));
+      return {
+        params: { slug: video.slug },
+        props: {
+          video,
+          position: index + 1,
+          total,
+          oembedHtml: oembed?.html ?? null,
+        },
+      };
+    }),
+  );
+}
+
+interface Props {
+  video: LaunchVideo;
+  position: number;
+  total: number;
+  oembedHtml: string | null;
+}
+
+const { video, position, total, oembedHtml } = Astro.props;
+const description =
+  video.description ||
+  `${video.title} — a product launch video from ${video.company} on X.`;
+const counterWidth = String(total).length;
+const positionLabel = String(position).padStart(counterWidth, "0");
+const totalLabel = String(total).padStart(counterWidth, "0");
+const monogram = video.company.trim().slice(0, 1).toUpperCase();
+const similarVideos = getSimilarVideos(video);
+const duration = formatDuration(video.durationSeconds);
+const handle = video.authorHandle.replace(/^@/, "");
+const tweetUrl = normalizeTweetUrl(video.tweetUrl);
+---
+
+<BaseLayout
+  title={`${video.title} — plv`}
+  description={description}
+  image={video.poster}
+>
+  <PageHeader client:load />
+  <main class="video-detail">
+    <div class="detail-utility">
+      <a
+        class="detail-close"
+        href="/#directory"
+        aria-label="Close video detail"
+        aria-keyshortcuts="Escape"
+        data-detail-close
+      >
+        <span>Close</span>
+        <kbd>Esc</kbd>
+      </a>
+      <div class="detail-logo">
+        {
+          video.authorAvatar ? (
+            <img src={video.authorAvatar} alt="" referrerpolicy="no-referrer" />
+          ) : (
+            <span class="detail-logo__fallback" aria-hidden="true">
+              {monogram}
+            </span>
+          )
+        }
+      </div>
+      <p class="detail-counter" aria-label={`Video ${position} of ${total}`}>
+        {positionLabel} / {totalLabel}
+      </p>
+    </div>
+
+    <article class="detail-profile" aria-labelledby="video-title">
+      {
+        oembedHtml ? (
+          <TweetEmbed
+            html={oembedHtml}
+            fallbackHref={tweetUrl}
+            fallbackLabel="Open original post on X"
+          />
+        ) : (
+          <figure class="detail-media">
+            <img
+              src={video.poster}
+              alt={`Poster for ${video.title}`}
+              width="1440"
+              height="810"
+            />
+            <a
+              class="detail-play-link"
+              href={tweetUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Watch ${video.title} on X`}
+            >
+              <span>
+                <Play size={16} fill="currentColor" aria-hidden="true" />
+                Watch on X
+                {duration && <span aria-hidden="true">· {duration}</span>}
+              </span>
+            </a>
+          </figure>
+        )
+      }
+
+      <h1 id="video-title">{video.title}</h1>
+
+      <dl class="detail-facts">
+        <div class="detail-fact detail-fact--about">
+          <dt>About</dt>
+          <dd>{description}</dd>
+        </div>
+        <div class="detail-fact">
+          <dt>Product</dt>
+          <dd>{video.product}</dd>
+        </div>
+        <div class="detail-fact">
+          <dt>Company</dt>
+          <dd>{video.company}</dd>
+        </div>
+        <div class="detail-fact">
+          <dt>Category</dt>
+          <dd>{categoryLabel(video.category)}</dd>
+        </div>
+        <div class="detail-fact">
+          <dt>Posted</dt>
+          <dd>{formatPublishedAt(video.publishedAt)}</dd>
+        </div>
+        {
+          duration && (
+            <div class="detail-fact">
+              <dt>Duration</dt>
+              <dd>{duration}</dd>
+            </div>
+          )
+        }
+        <div class="detail-fact">
+          <dt>Author</dt>
+          <dd>
+            <a
+              class="detail-website"
+              href={xProfileUrl(handle)}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open @${handle} on X`}
+            >
+              <span>@{handle}</span>
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          </dd>
+        </div>
+        <div class="detail-fact">
+          <dt>Original</dt>
+          <dd>
+            <a
+              class="detail-website"
+              href={tweetUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open original post for ${video.title}`}
+            >
+              <span>View on X</span>
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          </dd>
+        </div>
+        {
+          video.tags.length > 0 && (
+            <div class="detail-fact">
+              <dt>Tags</dt>
+              <dd>{video.tags.join(" · ")}</dd>
+            </div>
+          )
+        }
+      </dl>
+    </article>
+
+    <section class="similar-videos" aria-labelledby="similar-videos-title">
+      <h2 id="similar-videos-title">
+        Explore similar launches to {video.product}
+      </h2>
+      <div class="similar-videos__grid">
+        {
+          similarVideos.map((similar) => (
+            <article class="video-card video-card--card">
+              <a
+                class="video-card__main"
+                href={`/videos/${similar.slug}/`}
+                aria-label={`View ${similar.title}`}
+              >
+                <div class="video-card__media">
+                  <img
+                    src={similar.poster}
+                    alt={`Poster for ${similar.title}`}
+                    loading="lazy"
+                    width="1440"
+                    height="810"
+                  />
+                  <span class="video-card__play" aria-hidden="true">
+                    <Play size={18} fill="currentColor" />
+                  </span>
+                </div>
+                <div class="video-card__body">
+                  <div>
+                    <h3>{similar.title}</h3>
+                    <p class="video-card__meta">
+                      {similar.company}
+                      <span aria-hidden="true"> · </span>
+                      {categoryLabel(similar.category)}
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a
+                class="video-card__external"
+                href={normalizeTweetUrl(similar.tweetUrl)}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open original post for ${similar.title} on X`}
+              >
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+
+  <script>
+    const closeLink = document.querySelector("[data-detail-close]");
+
+    function returnFromDetail() {
+      let hasSameOriginReferrer = false;
+      try {
+        hasSameOriginReferrer =
+          new URL(document.referrer).origin === window.location.origin;
+      } catch {
+        hasSameOriginReferrer = false;
+      }
+
+      if (hasSameOriginReferrer && window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+
+      window.location.href = "/#directory";
+    }
+
+    closeLink?.addEventListener("click", (event) => {
+      event.preventDefault();
+      returnFromDetail();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.matches("input, textarea, select") || target.isContentEditable)
+      )
+        return;
+      if (document.querySelector("[data-slot='dialog-content']")) return;
+      event.preventDefault();
+      returnFromDetail();
+    });
+  </script>
+</BaseLayout>

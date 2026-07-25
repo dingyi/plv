@@ -1,0 +1,8 @@
+packages:
+  - .
+allowBuilds:
+  esbuild: true
+ignoreScripts: false
+onlyBuiltDependencies:
+  - esbuild
+  - sharp

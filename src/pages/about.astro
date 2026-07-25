@@ -1,0 +1,61 @@
+---
+import PageHeader from "@/components/PageHeader";
+import SiteFooter from "@/components/SiteFooter.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About — Product Launch Videos"
+  description="How plv collects, curates, and presents product launch videos from X."
+>
+  <PageHeader active="about" client:load />
+  <main class="about-page">
+    <h1 class="sr-only">About Product Launch Videos</h1>
+    <div class="about-content">
+      <section>
+        <h2>What is plv?</h2>
+        <p>
+          Product Launch Videos (plv) is an independent directory for
+          discovering product launch films, demos, and walkthroughs shared on
+          X. It is built for useful browsing—not rankings, ads, or paid
+          placement.
+        </p>
+      </section>
+      <section>
+        <h2>Why we built it</h2>
+        <p>
+          Great launch videos disappear into timelines within hours. plv keeps
+          a durable, searchable index so you can study how products announce
+          themselves—and jump straight to the original post on X.
+        </p>
+      </section>
+      <section>
+        <h2>What belongs in the index?</h2>
+        <p>
+          A video is published when it is clearly a product launch, demo, or
+          first-look walkthrough with a public X post. Entries store product
+          metadata, category, poster art, and a link back to the original
+          tweet. Draft records stay offline until review.
+        </p>
+      </section>
+      <section>
+        <h2>Curation and submissions</h2>
+        <p>
+          The catalog is curated first: editors add entries to
+          <code>src/data/videos.json</code>. Public submissions will open once
+          a lightweight review flow ships. Until then, the Submit action
+          explains how to contribute offline.
+        </p>
+      </section>
+      <section>
+        <h2>Independence</h2>
+        <p>
+          plv is not affiliated with X/Twitter or the products shown. Names,
+          trademarks, and video content remain the property of their respective
+          owners. Every profile links to the original post.
+        </p>
+      </section>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>

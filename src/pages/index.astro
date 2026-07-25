@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HomeApp from "@/components/HomeApp";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { publishedVideos } from "@/lib/catalog";
+---
+
+<BaseLayout
+  title="Product Launch Videos — Discover launches from X"
+  description="A curated directory of product launch videos, demos, and walkthroughs shared on X/Twitter."
+>
+  <HomeApp videos={publishedVideos} client:load />
+  <SiteFooter />
+  <script is:inline>
+    if (window.location.search) {
+      const meta = document.createElement("meta");
+      meta.name = "robots";
+      meta.content = "noindex,follow";
+      document.head.appendChild(meta);
+    }
+  </script>
+</BaseLayout>

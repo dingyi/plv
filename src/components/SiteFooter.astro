@@ -1,0 +1,23 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <a class="wordmark footer-mark" href="/">plv</a>
+  <nav class="footer-nav" aria-label="Footer navigation">
+    <a href="/about/">About</a>
+    <span aria-hidden="true">·</span>
+    <button data-submit-notice type="button">Submit ↗</button>
+    <span aria-hidden="true">·</span>
+    <a href="https://github.com/dingyi/plv" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </nav>
+  <p class="footer-meta">Independent directory · © {year} Product Launch Videos</p>
+</footer>
+
+<script>
+  document.querySelectorAll("[data-submit-notice]").forEach((button) => {
+    button.addEventListener("click", () =>
+      window.dispatchEvent(new CustomEvent("plv-submit")),
+    );
+  });
+</script>
