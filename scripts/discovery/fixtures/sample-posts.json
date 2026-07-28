@@ -1,0 +1,88 @@
+[
+  {
+    "tweetId": "2079973992077902283",
+    "tweetUrl": "https://x.com/readwise/status/2079973992077902283",
+    "authorHandle": "readwise",
+    "authorName": "Readwise",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1333582244817100801/W9vXWh4U.jpg",
+    "text": "Introducing: Readwise 2.0.\n\nThe same app to easily revisit and learn from your highlights, now rebuilt from the ground up.\n\nFresh design, smoother animations, much faster everywhere.",
+    "createdAt": "2026-07-22T16:56:58.000Z",
+    "media": [
+      {
+        "type": "video",
+        "previewImageUrl": "https://pbs.twimg.com/amplify_video_thumb/2079973747889717248/img/example.jpg",
+        "durationMs": 60116,
+        "videoUrl": "https://video.twimg.com/amplify_video/2079973747889717248/vid/avc1/1920x1080/ER3vfHFmrFp9nPc7.mp4"
+      }
+    ],
+    "metrics": {
+      "likeCount": 318,
+      "repostCount": 32,
+      "replyCount": 37,
+      "viewCount": 53800
+    }
+  },
+  {
+    "tweetId": "9990000000000000001",
+    "tweetUrl": "https://x.com/linear/status/9990000000000000001",
+    "authorHandle": "linear",
+    "authorName": "Linear",
+    "text": "We're hiring a product designer in NYC!",
+    "createdAt": "2026-07-21T12:00:00.000Z",
+    "media": [
+      {
+        "type": "video",
+        "durationMs": 15000,
+        "videoUrl": "https://example.com/hiring.mp4"
+      }
+    ],
+    "metrics": { "likeCount": 12, "viewCount": 900 }
+  },
+  {
+    "tweetId": "9990000000000000002",
+    "tweetUrl": "https://x.com/cursor_ai/status/9990000000000000002",
+    "authorHandle": "cursor_ai",
+    "authorName": "Cursor",
+    "text": "Just shipped intelligent model routing. Launch walkthrough below.",
+    "createdAt": "2026-07-20T18:00:00.000Z",
+    "media": [
+      {
+        "type": "video",
+        "durationMs": 22000,
+        "videoUrl": "https://example.com/router.mp4"
+      }
+    ],
+    "metrics": { "likeCount": 1200, "viewCount": 88000 }
+  },
+  {
+    "tweetId": "9990000000000000003",
+    "tweetUrl": "https://x.com/OpenAI/status/9990000000000000003",
+    "authorHandle": "OpenAI",
+    "authorName": "OpenAI",
+    "text": "A photo from our office plants.",
+    "createdAt": "2026-07-19T10:00:00.000Z",
+    "media": [
+      {
+        "type": "photo",
+        "previewImageUrl": "https://example.com/plant.jpg"
+      }
+    ],
+    "metrics": { "likeCount": 5000, "viewCount": 100000 }
+  },
+  {
+    "tweetId": "2079233260161323371",
+    "tweetUrl": "https://x.com/linear/status/2079233260161323371",
+    "authorHandle": "linear",
+    "authorName": "Linear",
+    "text": "Introducing Linear Loops — already in the catalog, should be deduped.",
+    "createdAt": "2026-07-20T15:53:34.000Z",
+    "media": [
+      {
+        "type": "video",
+        "durationMs": 40000,
+        "videoUrl": "https://example.com/loops.mp4"
+      }
+    ],
+    "metrics": { "likeCount": 900, "viewCount": 50000 }
+  }
+]

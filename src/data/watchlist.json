@@ -1,0 +1,182 @@
+[
+  {
+    "handle": "OpenAI",
+    "company": "OpenAI",
+    "category": "ai",
+    "tags": ["openai", "agents"]
+  },
+  {
+    "handle": "AnthropicAI",
+    "company": "Anthropic",
+    "category": "ai",
+    "tags": ["claude", "ai"]
+  },
+  {
+    "handle": "GoogleDeepMind",
+    "company": "Google DeepMind",
+    "category": "ai",
+    "tags": ["deepmind", "google"]
+  },
+  {
+    "handle": "xai",
+    "company": "xAI",
+    "category": "ai",
+    "tags": ["grok", "xai"]
+  },
+  {
+    "handle": "cursor_ai",
+    "company": "Cursor",
+    "category": "developer-tools",
+    "tags": ["ide", "agents"]
+  },
+  {
+    "handle": "linear",
+    "company": "Linear",
+    "category": "productivity",
+    "tags": ["saas", "agents"]
+  },
+  {
+    "handle": "vercel",
+    "company": "Vercel",
+    "category": "developer-tools",
+    "tags": ["vercel", "ai"]
+  },
+  {
+    "handle": "NotionHQ",
+    "company": "Notion",
+    "category": "productivity",
+    "tags": ["workspace", "ai"]
+  },
+  {
+    "handle": "figma",
+    "company": "Figma",
+    "category": "design",
+    "tags": ["design", "ai"]
+  },
+  {
+    "handle": "github",
+    "company": "GitHub",
+    "category": "developer-tools",
+    "tags": ["devtools", "copilot"]
+  },
+  {
+    "handle": "Microsoft",
+    "company": "Microsoft",
+    "category": "productivity",
+    "tags": ["microsoft", "ai"]
+  },
+  {
+    "handle": "Google",
+    "company": "Google",
+    "category": "ai",
+    "tags": ["google", "gemini"]
+  },
+  {
+    "handle": "MetaAI",
+    "company": "Meta AI",
+    "category": "ai",
+    "tags": ["meta", "llama"]
+  },
+  {
+    "handle": "midjourney",
+    "company": "Midjourney",
+    "category": "ai",
+    "tags": ["image", "generative"]
+  },
+  {
+    "handle": "runwayml",
+    "company": "Runway",
+    "category": "ai",
+    "tags": ["video", "generative"]
+  },
+  {
+    "handle": "perplexity_ai",
+    "company": "Perplexity",
+    "category": "ai",
+    "tags": ["search", "ai"]
+  },
+  {
+    "handle": "huggingface",
+    "company": "Hugging Face",
+    "category": "ai",
+    "tags": ["open-source", "ml"]
+  },
+  {
+    "handle": "replicate",
+    "company": "Replicate",
+    "category": "ai",
+    "tags": ["api", "ml"]
+  },
+  {
+    "handle": "ElevenLabsIO",
+    "company": "ElevenLabs",
+    "category": "ai",
+    "tags": ["voice", "audio"]
+  },
+  {
+    "handle": "readwise",
+    "company": "Readwise",
+    "category": "productivity",
+    "tags": ["reading", "highlights"]
+  },
+  {
+    "handle": "stripe",
+    "company": "Stripe",
+    "category": "developer-tools",
+    "tags": ["payments", "api"]
+  },
+  {
+    "handle": "supabase",
+    "company": "Supabase",
+    "category": "developer-tools",
+    "tags": ["backend", "database"]
+  },
+  {
+    "handle": "Railway",
+    "company": "Railway",
+    "category": "developer-tools",
+    "tags": ["infra", "deploy"]
+  },
+  {
+    "handle": "cloudflare",
+    "company": "Cloudflare",
+    "category": "developer-tools",
+    "tags": ["infra", "edge"]
+  },
+  {
+    "handle": "framer",
+    "company": "Framer",
+    "category": "design",
+    "tags": ["design", "web"]
+  },
+  {
+    "handle": "raycastapp",
+    "company": "Raycast",
+    "category": "productivity",
+    "tags": ["mac", "launcher"]
+  },
+  {
+    "handle": "arcbrowser",
+    "company": "Arc / The Browser Company",
+    "category": "consumer",
+    "tags": ["browser"]
+  },
+  {
+    "handle": "warpdotdev",
+    "company": "Warp",
+    "category": "developer-tools",
+    "tags": ["terminal", "ai"]
+  },
+  {
+    "handle": "replit",
+    "company": "Replit",
+    "category": "developer-tools",
+    "tags": ["ide", "agents"]
+  },
+  {
+    "handle": "lovable_dev",
+    "company": "Lovable",
+    "category": "developer-tools",
+    "tags": ["agents", "codegen"]
+  }
+]

@@ -2,9 +2,8 @@ import {
   ArrowLeft,
   ArrowRight,
   ExternalLink,
-  Grid2X2,
-  List,
   Play,
+  Search,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
@@ -24,7 +23,6 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
 import {
   CATEGORIES,
@@ -44,15 +42,11 @@ interface Props {
   videos: LaunchVideo[];
 }
 
-type View = "card" | "list";
-
 function VideoCard({
   video,
-  view,
   onPlay,
 }: {
   video: LaunchVideo;
-  view: View;
   onPlay: (video: LaunchVideo) => void;
 }) {
   const duration = formatDuration(video.durationSeconds);
@@ -72,7 +66,11 @@ function VideoCard({
   }
 
   return (
-    <article className={`video-card video-card--${view}`}>
+    <article className="video-card">
+      <span className="corner one" aria-hidden="true" />
+      <span className="corner two" aria-hidden="true" />
+      <span className="corner three" aria-hidden="true" />
+      <span className="corner four" aria-hidden="true" />
       <div className="video-card__main" data-video-slug={video.slug}>
         <button
           type="button"
@@ -88,11 +86,14 @@ function VideoCard({
             height="810"
           />
           <span className="video-card__play" aria-hidden="true">
-            <Play size={view === "list" ? 14 : 18} fill="currentColor" />
+            <Play size={18} fill="currentColor" />
           </span>
           {duration && (
             <span className="video-card__duration">{duration}</span>
           )}
+          <span className="video-card__hover-label" aria-hidden="true">
+            <span>{video.company}</span>
+          </span>
         </button>
         <div className="video-card__body">
           <div>
@@ -122,9 +123,6 @@ function VideoCard({
               {formatPublishedAt(video.publishedAt)}
             </p>
           </div>
-          {view === "list" && video.description && (
-            <p className="video-card__description">{video.description}</p>
-          )}
         </div>
       </div>
       <a
@@ -143,8 +141,6 @@ function VideoCard({
 export default function HomeApp({ videos }: Props) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
-  const [view, setView] = useState<View>("card");
-  const [viewInUrl, setViewInUrl] = useState(false);
   const [page, setPage] = useState(1);
   const [searchOpen, setSearchOpen] = useState(false);
   const [newsletterOpen, setNewsletterOpen] = useState(false);
@@ -175,16 +171,8 @@ export default function HomeApp({ videos }: Props) {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const storedView = window.localStorage.getItem("plv-view");
     setQuery(params.get("q") ?? "");
     setCategory(params.get("category") ?? "all");
-    setView(
-      params.get("view") === "list" ||
-        (!params.has("view") && storedView === "list")
-        ? "list"
-        : "card",
-    );
-    setViewInUrl(params.has("view"));
     setPage(Number(params.get("page") ?? 1));
     setSearchOpen(params.get("search") === "1");
     setReady(true);
@@ -216,7 +204,6 @@ export default function HomeApp({ videos }: Props) {
     const params = new URLSearchParams();
     if (query) params.set("q", query);
     if (category !== "all") params.set("category", category);
-    if (viewInUrl) params.set("view", view);
     if (currentPage > 1) params.set("page", String(currentPage));
     const queryString = params.toString();
     window.history.replaceState(
@@ -226,8 +213,7 @@ export default function HomeApp({ videos }: Props) {
         ? `${window.location.pathname}?${queryString}`
         : window.location.pathname,
     );
-    window.localStorage.setItem("plv-view", view);
-  }, [category, currentPage, query, ready, view, viewInUrl]);
+  }, [category, currentPage, query, ready]);
 
   useEffect(() => {
     if (!ready) return;
@@ -255,7 +241,7 @@ export default function HomeApp({ videos }: Props) {
     window.addEventListener("pageshow", restoreDirectoryPosition);
     return () =>
       window.removeEventListener("pageshow", restoreDirectoryPosition);
-  }, [ready, currentPage, view]);
+  }, [ready, currentPage]);
 
   function choosePage(next: number) {
     setPage(next);
@@ -317,80 +303,57 @@ export default function HomeApp({ videos }: Props) {
           aria-labelledby="directory-title"
         >
           <div className="directory-toolbar">
-            <div>
-              <p className="eyebrow" id="directory-title" tabIndex={-1}>
-                Launches
-              </p>
-              <p className="result-count">
-                {filtered.length} video{filtered.length === 1 ? "" : "s"}
-              </p>
-            </div>
             <div className="directory-controls">
               <Select
                 value={category}
                 onValueChange={(value) => {
-                  setCategory(value ?? "all");
+                  setCategory(value || "all");
                   setPage(1);
                 }}
               >
                 <SelectTrigger
                   className="category-select"
                   aria-label="Filter by category"
-                >
-                  <SelectValue>
-                    {category === "all"
-                      ? "All categories"
-                      : selectedCategoryLabel}
-                  </SelectValue>
-                </SelectTrigger>
+                  placeholder="All categories"
+                />
                 <SelectContent>
-                  <SelectItem value="all">All categories</SelectItem>
-                  {CATEGORIES.map((item) => (
-                    <SelectItem key={item.id} value={item.id}>
+                  <SelectItem index={0} value="all">
+                    All categories
+                  </SelectItem>
+                  {CATEGORIES.map((item, index) => (
+                    <SelectItem
+                      key={item.id}
+                      index={index + 1}
+                      value={item.id}
+                    >
                       {item.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-              <div
-                className="view-switch"
-                role="group"
-                aria-label="Directory layout"
-              >
-                <button
-                  className={view === "card" ? "is-active" : ""}
-                  type="button"
-                  onClick={() => {
-                    setView("card");
-                    setViewInUrl(true);
-                  }}
-                  aria-label="Card view"
-                  aria-pressed={view === "card"}
-                >
-                  <Grid2X2 size={16} />
-                </button>
-                <button
-                  className={view === "list" ? "is-active" : ""}
-                  type="button"
-                  onClick={() => {
-                    setView("list");
-                    setViewInUrl(true);
-                  }}
-                  aria-label="List view"
-                  aria-pressed={view === "list"}
-                >
-                  <List size={17} />
-                </button>
-              </div>
+              <p className="result-count" id="directory-title" tabIndex={-1}>
+                {filtered.length} video{filtered.length === 1 ? "" : "s"}
+              </p>
             </div>
+            <button
+              className="directory-search"
+              type="button"
+              aria-label="Search launch videos"
+              onClick={() => setSearchOpen(true)}
+            >
+              <Search aria-hidden="true" size={15} strokeWidth={1.8} />
+              <span>Search videos</span>
+              <kbd aria-hidden="true">
+                <span>⌘</span>K
+              </kbd>
+            </button>
           </div>
 
           {visible.length ? (
-            <div className={`video-grid video-grid--${view}`}>
+            <div className="video-grid">
               {visible.map((video) => (
                 <VideoCard
                   video={video}
-                  view={view}
                   key={video.id}
                   onPlay={setPlayingVideo}
                 />

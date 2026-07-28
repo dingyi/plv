@@ -1,6 +1,6 @@
 import type { LaunchVideo } from "@/lib/catalog";
 
-export const PAGE_SIZE = 24;
+export const PAGE_SIZE = 50;
 
 export function filterVideos(
   videos: LaunchVideo[],

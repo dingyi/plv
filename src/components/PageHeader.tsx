@@ -1,6 +1,7 @@
-import { Menu, Search, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
+import ThemeToggle from "@/components/ThemeToggle";
 import VideoSearch, {
   type VideoSearchItem,
 } from "@/components/VideoSearch";
@@ -81,9 +82,6 @@ export default function PageHeader({
       <header className="site-header" data-header-ready={ready}>
         <nav className="site-nav" aria-label="Primary navigation">
           <div className="nav-left">
-            <a className="wordmark" href="/" aria-label="plv home">
-              plv
-            </a>
             <div className="desktop-nav">
               <a
                 className={active === "discover" ? "is-active" : ""}
@@ -101,19 +99,11 @@ export default function PageHeader({
               </a>
             </div>
           </div>
-          <button
-            className="header-search"
-            type="button"
-            aria-label="Search launch videos"
-            onClick={openSearch}
-          >
-            <Search aria-hidden="true" size={15} strokeWidth={1.8} />
-            <span>Search videos</span>
-            <kbd aria-hidden="true">
-              <span>⌘</span>K
-            </kbd>
-          </button>
+          <a className="wordmark" href="/" aria-label="plv home">
+            plv
+          </a>
           <div className="nav-right">
+            <ThemeToggle />
             <a
               className={`nav-submit${active === "submit" ? " is-current" : ""}`}
               href="/submit/"

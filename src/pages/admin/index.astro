@@ -1,0 +1,26 @@
+---
+import AdminApp from "@/components/AdminApp";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import inboxData from "@/data/inbox.json";
+import { normalizeInbox, sha256Hex } from "@/lib/inbox";
+
+const inbox = normalizeInbox(inboxData);
+const rawPassword = import.meta.env.ADMIN_PASSWORD ?? "";
+const passwordHash = rawPassword ? await sha256Hex(rawPassword) : "";
+const openAccess = import.meta.env.DEV && !rawPassword;
+---
+
+<BaseLayout
+  title="Admin — Product Launch Videos"
+  description="Private review queue for auto-discovered launch videos."
+>
+  <meta slot="head" name="robots" content="noindex, nofollow" />
+  <main class="admin-page">
+    <AdminApp
+      client:load
+      initialInbox={inbox}
+      passwordHash={passwordHash}
+      openAccess={openAccess}
+    />
+  </main>
+</BaseLayout>

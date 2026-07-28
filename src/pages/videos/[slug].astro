@@ -202,7 +202,11 @@ const tweetUrl = normalizeTweetUrl(video.tweetUrl);
       <div class="similar-videos__grid">
         {
           similarVideos.map((similar) => (
-            <article class="video-card video-card--card">
+            <article class="video-card">
+              <span class="corner one" aria-hidden="true" />
+              <span class="corner two" aria-hidden="true" />
+              <span class="corner three" aria-hidden="true" />
+              <span class="corner four" aria-hidden="true" />
               <a
                 class="video-card__main"
                 href={`/videos/${similar.slug}/`}
@@ -218,6 +222,9 @@ const tweetUrl = normalizeTweetUrl(video.tweetUrl);
                   />
                   <span class="video-card__play" aria-hidden="true">
                     <Play size={18} fill="currentColor" />
+                  </span>
+                  <span class="video-card__hover-label" aria-hidden="true">
+                    <span>{similar.company}</span>
                   </span>
                 </div>
                 <div class="video-card__body">

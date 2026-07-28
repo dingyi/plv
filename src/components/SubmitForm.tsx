@@ -8,7 +8,6 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
 import { CATEGORIES } from "@/lib/catalog";
 import {
@@ -184,21 +183,20 @@ export default function SubmitForm() {
         <label className="submit-field">
           <span>Category</span>
           <Select
-            value={form.category || null}
+            value={form.category || ""}
             onValueChange={(value) =>
-              update("category", (value ?? "") as LaunchSubmission["category"])
+              update("category", (value || "") as LaunchSubmission["category"])
             }
           >
             <SelectTrigger
               className="submit-select"
               aria-label="Category"
               aria-invalid={touched && Boolean(errors.category)}
-            >
-              <SelectValue placeholder="Select a category" />
-            </SelectTrigger>
+              placeholder="Select a category"
+            />
             <SelectContent>
-              {CATEGORIES.map((item) => (
-                <SelectItem key={item.id} value={item.id}>
+              {CATEGORIES.map((item, index) => (
+                <SelectItem key={item.id} index={index} value={item.id}>
                   {item.label}
                 </SelectItem>
               ))}

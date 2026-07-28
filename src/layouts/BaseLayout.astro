@@ -22,7 +22,7 @@ const canonicalURL = new URL(Astro.url.pathname, site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f2f2f2" />
+    <meta name="theme-color" content="#fafafa" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -33,6 +33,82 @@ const canonicalURL = new URL(Astro.url.pathname, site);
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script is:inline>
+      (function () {
+        function apply(theme) {
+          var root = document.documentElement;
+          root.dataset.theme = theme;
+          root.classList.toggle("dark", theme === "dark");
+          root.classList.toggle("light", theme === "light");
+          root.style.colorScheme = theme;
+          try {
+            localStorage.setItem("theme", theme);
+          } catch (e) {}
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) {
+            meta.setAttribute(
+              "content",
+              theme === "dark" ? "#09090b" : "#fafafa",
+            );
+          }
+          document.querySelectorAll("[data-theme-toggle]").forEach(function (btn) {
+            btn.setAttribute("data-theme-active", theme);
+            btn.setAttribute(
+              "aria-label",
+              theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+            );
+            btn.setAttribute(
+              "title",
+              theme === "dark" ? "Light mode" : "Dark mode",
+            );
+          });
+        }
+
+        function current() {
+          var root = document.documentElement;
+          if (root.dataset.theme === "dark" || root.classList.contains("dark"))
+            return "dark";
+          if (root.dataset.theme === "light" || root.classList.contains("light"))
+            return "light";
+          return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+
+        try {
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          var theme =
+            stored === "light" || stored === "dark"
+              ? stored
+              : prefersDark
+                ? "dark"
+                : "light";
+          apply(theme);
+        } catch (e) {}
+
+        // Native delegation — works even if React hydration is delayed/fails.
+        document.addEventListener(
+          "click",
+          function (event) {
+            var target = event.target;
+            if (!(target instanceof Element)) return;
+            var btn = target.closest("[data-theme-toggle]");
+            if (!btn) return;
+            event.preventDefault();
+            var next = current() === "dark" ? "light" : "dark";
+            apply(next);
+          },
+          true,
+        );
+
+        window.__plvApplyTheme = apply;
+        window.__plvCurrentTheme = current;
+      })();
+    </script>
+    <slot name="head" />
   </head>
   <body>
     <slot />
