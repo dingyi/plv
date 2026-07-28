@@ -36,10 +36,35 @@ export default function VideoPlayerDialog({
   const [status, setStatus] = useState<PlayerStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  // Keep the portal alive through the exit animation: `open` flips false (and
+  // the parent clears `video`) immediately, so we render from a cached copy
+  // and unmount only after the close tween (--duration-quick) has played.
+  const [rendered, setRendered] = useState(open);
+  const [closing, setClosing] = useState(false);
+  const lastVideoRef = useRef<LaunchVideo | null>(null);
+  if (video) lastVideoRef.current = video;
+  // Mount the portal in the SAME commit that `open` flips true (adjust-state-
+  // during-render). Deferring this to an effect would render null on the first
+  // pass, leaving playerRef empty when the load effect below runs — the video
+  // would never get its src and the controls stay disabled.
+  if (open && !rendered) {
+    setRendered(true);
+    setClosing(false);
+  }
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (open || !rendered) return;
+    setClosing(true);
+    const id = setTimeout(() => {
+      setRendered(false);
+      setClosing(false);
+    }, 150);
+    return () => clearTimeout(id);
+  }, [open, rendered]);
 
   useEffect(() => {
     if (!open) return;
@@ -84,9 +109,18 @@ export default function VideoPlayerDialog({
       if (cancelled) return;
       setStatus("ready");
       try {
+        // The modal opens from a click, so unmuted autoplay is normally
+        // allowed by the browser's user-activation policy.
         await player.play();
       } catch {
-        // Autoplay may be blocked; native controls remain usable.
+        try {
+          // Fall back to muted autoplay if the unmuted attempt was blocked;
+          // the user can unmute via the native controls.
+          player.muted = true;
+          await player.play();
+        } catch {
+          // Autoplay fully blocked; native controls remain usable.
+        }
       }
     };
 
@@ -109,14 +143,15 @@ export default function VideoPlayerDialog({
     };
   }, [open, video]);
 
-  if (!mounted || !open || !video) return null;
+  const activeVideo = video ?? lastVideoRef.current;
+  if (!mounted || !rendered || !activeVideo) return null;
 
-  const duration = formatDuration(video.durationSeconds);
-  const tweetUrl = normalizeTweetUrl(video.tweetUrl);
+  const duration = formatDuration(activeVideo.durationSeconds);
+  const tweetUrl = normalizeTweetUrl(activeVideo.tweetUrl);
 
   return createPortal(
     <div
-      className="video-player-modal"
+      className={closing ? "video-player-modal is-closing" : "video-player-modal"}
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
@@ -128,33 +163,6 @@ export default function VideoPlayerDialog({
         onClick={() => onOpenChange(false)}
       />
       <div className="video-player-modal__panel">
-        <div className="video-player-modal__header">
-          <div>
-            <h2 id={titleId} className="video-player-modal__title">
-              {video.title}
-            </h2>
-            <p className="video-player-modal__meta">
-              {video.company}
-              <span aria-hidden="true"> · </span>
-              {categoryLabel(video.category)}
-              {duration && (
-                <>
-                  <span aria-hidden="true"> · </span>
-                  {duration}
-                </>
-              )}
-            </p>
-          </div>
-          <button
-            type="button"
-            className="video-player-modal__close"
-            onClick={() => onOpenChange(false)}
-            aria-label="Close player"
-          >
-            <X size={18} />
-          </button>
-        </div>
-
         <div className="video-player-modal__stage">
           <video
             ref={playerRef}
@@ -162,10 +170,57 @@ export default function VideoPlayerDialog({
             controls
             playsInline
             preload="auto"
-            poster={video.poster}
+            poster={activeVideo.poster}
           >
             Your browser does not support video playback.
           </video>
+
+          {/* Cinema overlays: hidden until the stage is hovered or focused,
+              always visible on touch devices (see CSS hover:none rule). */}
+          <div className="video-player-modal__overlay video-player-modal__overlay--top">
+            <div className="video-player-modal__heading">
+              <h2 id={titleId} className="video-player-modal__title">
+                {activeVideo.title}
+              </h2>
+              <p className="video-player-modal__meta">
+                {activeVideo.company}
+                <span aria-hidden="true"> · </span>
+                {categoryLabel(activeVideo.category)}
+                {duration && (
+                  <>
+                    <span aria-hidden="true"> · </span>
+                    {duration}
+                  </>
+                )}
+              </p>
+            </div>
+            <div className="video-player-modal__actions">
+              <a
+                className="video-player-modal__link"
+                href={`/videos/${activeVideo.slug}/`}
+              >
+                Open details
+              </a>
+              <a
+                className="video-player-modal__link"
+                href={tweetUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Original on X
+                <ExternalLink size={14} aria-hidden="true" />
+              </a>
+              <button
+                type="button"
+                className="video-player-modal__close"
+                onClick={() => onOpenChange(false)}
+                aria-label="Close player"
+              >
+                <X size={18} />
+              </button>
+            </div>
+          </div>
+
           {status === "loading" && (
             <div className="video-player-modal__status" role="status">
               <LoaderCircle className="video-player-modal__spinner" size={22} />
@@ -181,24 +236,6 @@ export default function VideoPlayerDialog({
               </a>
             </div>
           )}
-        </div>
-
-        <div className="video-player-modal__footer">
-          <a
-            className="video-player-modal__link"
-            href={`/videos/${video.slug}/`}
-          >
-            Open details
-          </a>
-          <a
-            className="video-player-modal__link"
-            href={tweetUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Original on X
-            <ExternalLink size={14} aria-hidden="true" />
-          </a>
         </div>
       </div>
     </div>,

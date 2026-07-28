@@ -154,10 +154,10 @@ const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
                   ...(baseStyle as React.CSSProperties | undefined),
                   ...(props.style as React.CSSProperties | undefined),
                 }}
-                initial={{ opacity: 0, scale: 0.97, x: "-50%", y: "-50%" }}
+                initial={{ opacity: 0, scale: 0.96, x: "-50%", y: "-50%" }}
                 animate={{
                   opacity: exiting ? 0 : 1,
-                  scale: exiting ? 0.97 : 1,
+                  scale: exiting ? 0.96 : 1,
                   x: "-50%",
                   y: "-50%",
                 }}
