@@ -1721,10 +1721,10 @@ img {
 .submit-form h1,
 .submit-success h1 {
   margin: 0;
-  font-size: clamp(34px, 5vw, 48px);
-  font-weight: 480;
-  letter-spacing: -0.05em;
-  line-height: 1.05;
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   text-wrap: balance;
 }
 .submit-lead {
@@ -1743,7 +1743,8 @@ img {
 .submit-fieldset legend {
   padding: 0;
   color: var(--muted-foreground);
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -1759,32 +1760,50 @@ img {
   margin: 0 0 14px;
 }
 .submit-field > span {
-  color: var(--n-600);
-  font-size: 13px;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 .submit-field small {
   color: var(--n-500);
   font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
 }
 .submit-field input,
 .submit-select {
   width: 100% !important;
   min-width: 0 !important;
 }
+/* Square hairline fields — same chrome as the homepage toolbar */
+.submit-form input[data-slot="input"],
 .submit-select {
   height: 42px !important;
+  border: 0.5px solid var(--grid-line) !important;
+  border-radius: 0 !important;
+  background: var(--card) !important;
+  box-shadow: none !important;
+}
+.submit-form input[data-slot="input"]:focus-visible {
+  box-shadow: 0 0 0 1px var(--focus-ring, #6b97ff) !important;
+}
+.submit-form input[data-slot="input"][aria-invalid="true"] {
+  border-color: var(--destructive) !important;
 }
 .submit-textarea {
   width: 100%;
   min-height: 104px;
   resize: vertical;
   padding: 11px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--shape-input-radius, 12px);
+  border: 0.5px solid var(--grid-line);
+  border-radius: 0;
   background: var(--card);
   color: var(--foreground);
   font: inherit;
+  font-size: 13px;
   line-height: 1.45;
 }
 .submit-textarea:focus-visible {
@@ -1805,6 +1824,19 @@ img {
 .submit-button {
   width: 100%;
   height: 44px !important;
+  border: 0.5px solid var(--foreground) !important;
+  border-radius: 0 !important;
+  background: var(--foreground) !important;
+  color: var(--background) !important;
+  box-shadow: none !important;
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase;
+}
+.submit-button:hover {
+  opacity: 0.88;
 }
 .submit-footnote {
   margin: 0;
@@ -1833,22 +1865,26 @@ img {
 .submit-copy {
   height: 36px;
   padding: 0 14px;
-  border: 0;
-  border-radius: 12px;
+  border: 0.5px solid var(--grid-line);
+  border-radius: 0;
   background: var(--muted);
   color: var(--foreground);
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   cursor: pointer;
 }
 .submit-secondary:hover,
 .submit-copy:hover {
-  background: #dedede;
+  background: var(--accent);
 }
 .submit-draft {
   margin-top: 28px;
   overflow: hidden;
-  border: 1px solid var(--grid-line);
-  border-radius: 16px;
+  border: 0.5px solid var(--grid-line);
+  border-radius: 0;
   background: var(--card);
 }
 .submit-draft__header {
@@ -1857,12 +1893,16 @@ img {
   justify-content: space-between;
   gap: 12px;
   padding: 12px 14px;
-  border-bottom: 1px solid var(--grid-line);
+  border-bottom: 0.5px solid var(--grid-line);
 }
 .submit-draft h2 {
   margin: 0;
-  font-size: 13px;
-  font-weight: 560;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 .submit-copy {
   display: inline-flex;
