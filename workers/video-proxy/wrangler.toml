@@ -1,0 +1,6 @@
+name = "plv-video-proxy"
+main = "src/index.js"
+compatibility_date = "2026-07-29"
+
+# No routes/binding needed — the worker is served from its workers.dev
+# subdomain (or attach a custom domain route below once deployed).
