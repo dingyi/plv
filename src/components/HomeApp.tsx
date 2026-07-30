@@ -81,7 +81,7 @@ function VideoCard({
           type="button"
           className="video-card__media"
           onClick={() => onPlay(video)}
-          aria-label={`Play ${video.title}`}
+          aria-label={`Play ${video.title}${duration ? `, ${duration}` : ""}`}
         >
           <img
             src={small}
