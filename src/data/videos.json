@@ -16582,5 +16582,83 @@
     "durationSeconds": 24,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-flint-image-edit",
+    "slug": "flint-image-edit",
+    "title": "Flint Image Edit — ten references in, four edits out",
+    "product": "Flint Image Edit",
+    "company": "each::labs",
+    "description": "Flint Image Edit takes up to ten reference images and one prompt, and returns four edited versions in a single call — the edit model you wanted, but cheaper.",
+    "category": "ai",
+    "tags": [
+      "eachlabs",
+      "flint",
+      "image-edit",
+      "ai"
+    ],
+    "tweetUrl": "https://x.com/eachlabs/status/2082466151250944314",
+    "tweetId": "2082466151250944314",
+    "authorName": "each::labs",
+    "authorHandle": "eachlabs",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2008131854352723968/ElGVlPd1_400x400.jpg",
+    "poster": "/posters/flint-image-edit.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2082466087707320320/vid/avc1/1920x1080/dw-UrMswq50hHD1n.mp4",
+    "publishedAt": "2026-07-29T13:59:55.000Z",
+    "durationSeconds": 32,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-minimax-h3-teaser",
+    "slug": "minimax-h3-teaser",
+    "title": "MiniMax H3 — it's coming",
+    "product": "MiniMax H3",
+    "company": "MiniMax",
+    "description": "MiniMax teases H3 from Hailuo AI.",
+    "category": "ai",
+    "tags": [
+      "minimax",
+      "hailuo",
+      "h3",
+      "teaser"
+    ],
+    "tweetUrl": "https://x.com/MiniMax_AI/status/2082779062653845803",
+    "tweetId": "2082779062653845803",
+    "authorName": "MiniMax (official)",
+    "authorHandle": "MiniMax_AI",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1875100548535574529/VxHk9HyU_400x400.jpg",
+    "poster": "/posters/minimax-h3-teaser.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2082778044692135936/vid/avc1/2560x1440/7ydrRtg9F1D4-I9E.mp4",
+    "publishedAt": "2026-07-30T10:43:19.000Z",
+    "durationSeconds": 60,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-graph-slides",
+    "slug": "graph-slides",
+    "title": "Graph slides — a graph-based slide deck",
+    "product": "Graph slides",
+    "company": "Yohei Nakajima",
+    "description": "A graph-based slide system: nodes carry slide numbers, and selecting a slide pulls in the matching nodes. Demo and source on GitHub.",
+    "category": "developer-tools",
+    "tags": [
+      "graph",
+      "slides",
+      "open-source",
+      "visualization"
+    ],
+    "tweetUrl": "https://x.com/yoheinakajima/status/2082122524113215816",
+    "tweetId": "2082122524113215816",
+    "authorName": "Yohei",
+    "authorHandle": "yoheinakajima",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1452754543217831938/T2O-66Yy_400x400.jpg",
+    "poster": "/posters/graph-slides.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2082096549304426496/vid/avc1/2388x1488/rc4Osn-kJRqnUTyh.mp4",
+    "publishedAt": "2026-07-28T15:14:28.000Z",
+    "durationSeconds": 42,
+    "featured": false,
+    "status": "published"
   }
 ]
