@@ -237,7 +237,9 @@ const videoJsonLd = {
               >
                 <div class="video-card__media">
                   <img
-                    src={similar.poster}
+                    src={similar.poster.replace(/\.webp$/, "-960.webp")}
+                    srcSet={`${similar.poster.replace(/\.webp$/, "-960.webp")} 960w, ${similar.poster} 1440w`}
+                    sizes="(max-width: 699px) calc(100vw - 34px), 300px"
                     alt={`Poster for ${similar.title}`}
                     loading="lazy"
                     width="1440"

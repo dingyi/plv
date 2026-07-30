@@ -67,6 +67,8 @@ export function formatPublishedAt(iso: string) {
     month: "short",
     day: "numeric",
     year: "numeric",
+    // Pin UTC so SSR (server TZ) and client hydration render identical text.
+    timeZone: "UTC",
   }).format(date);
 }
 

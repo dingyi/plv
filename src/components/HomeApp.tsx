@@ -45,11 +45,16 @@ interface Props {
 function VideoCard({
   video,
   onPlay,
+  index,
 }: {
   video: LaunchVideo;
   onPlay: (video: LaunchVideo) => void;
+  index: number;
 }) {
   const duration = formatDuration(video.durationSeconds);
+  // Above-the-fold posters load eagerly; the LCP candidate gets top priority.
+  const eager = index < 6;
+  const small = video.poster.replace(/\.webp$/, "-960.webp");
 
   function rememberReturn() {
     window.history.replaceState(
@@ -79,9 +84,12 @@ function VideoCard({
           aria-label={`Play ${video.title}`}
         >
           <img
-            src={video.poster}
+            src={small}
+            srcSet={`${small} 960w, ${video.poster} 1440w`}
+            sizes="(max-width: 699px) calc(100vw - 34px), 420px"
             alt=""
-            loading="lazy"
+            loading={eager ? "eager" : "lazy"}
+            fetchPriority={index === 0 ? "high" : undefined}
             width="1440"
             height="810"
           />
@@ -351,10 +359,11 @@ export default function HomeApp({ videos }: Props) {
 
           {visible.length ? (
             <div className="video-grid">
-              {visible.map((video) => (
+              {visible.map((video, index) => (
                 <VideoCard
                   video={video}
                   key={video.id}
+                  index={index}
                   onPlay={setPlayingVideo}
                 />
               ))}

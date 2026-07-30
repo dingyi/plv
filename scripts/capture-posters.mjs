@@ -100,6 +100,17 @@ async function capture(video) {
       "82",
       posterAbs,
     ]);
+    // Grid-sized variant for responsive <img srcset> (cards render ~420px).
+    await run("ffmpeg", [
+      "-y",
+      "-i",
+      posterAbs,
+      "-vf",
+      "scale=960:-2",
+      "-q:v",
+      "80",
+      posterAbs.replace(/\.webp$/, "-960.webp"),
+    ]);
   }
 
   if (needStream) {
