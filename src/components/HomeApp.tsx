@@ -97,7 +97,9 @@ function VideoCard({
             <Play size={18} fill="currentColor" />
           </span>
           {duration && (
-            <span className="video-card__duration">{duration}</span>
+            <span className="video-card__duration" aria-hidden="true">
+              {duration}
+            </span>
           )}
           <span className="video-card__hover-label" aria-hidden="true">
             <span>{video.company}</span>
