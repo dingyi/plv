@@ -1,0 +1,42 @@
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # PUBLIC_VIDEO_PROXY_BASE is inlined into the client bundle at build
+      # time; without it playback falls back to local /streams (dev only).
+      - name: Build
+        run: pnpm build
+        env:
+          PUBLIC_VIDEO_PROXY_BASE: https://proxy.whatships.com
+
+      # Local playback streams are dev artifacts and blow past the Workers
+      # 25 MiB per-asset cap. Production playback uses the video proxy.
+      - name: Strip local streams
+        run: rm -rf dist/streams
+
+      - name: Deploy
+        run: pnpm exec wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
