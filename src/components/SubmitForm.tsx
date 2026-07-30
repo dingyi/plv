@@ -70,7 +70,6 @@ export default function SubmitForm() {
   if (step === "ready") {
     return (
       <div className="submit-success">
-        <p className="eyebrow">Submission ready</p>
         <h1>Open a GitHub issue to finish</h1>
         <p className="submit-lead">
           Your launch details were packaged into a review issue. If a new tab
@@ -115,7 +114,6 @@ export default function SubmitForm() {
   return (
     <form className="submit-form" onSubmit={onSubmit} noValidate>
       <div className="submit-intro">
-        <p className="eyebrow">Submit</p>
         <h1>Share a product launch video from X</h1>
         <p className="submit-lead">
           Point us to a public post with a launch film, demo, or walkthrough.
