@@ -1,8 +1,6 @@
-# Product Launch Videos (plv)
+# whatships.com
 
-A curated directory of product launch videos, demos, and walkthroughs shared on X/Twitter.
-
-Architecture is adapted from [studio.list](https://github.com/dingyi/studio.list): Astro static site, React islands for interactive search/filter, Tailwind + [Fluid Functionalism](https://github.com/mickadesign/fluid-functionalism) (Base UI primitives), JSON-backed catalog.
+A curated directory of startup launch videos, demos, and walkthroughs shared on X/Twitter — live at [whatships.com](https://whatships.com).
 
 ## Local development
 
@@ -19,15 +17,29 @@ Open [http://localhost:4321](http://localhost:4321).
 | --- | --- |
 | `pnpm dev` | Start the Astro dev server |
 | `pnpm build` | Production static build (fetches X oEmbed at build time) |
+| `pnpm deploy` | Build, strip local streams, and deploy to Cloudflare Workers |
 | `pnpm preview` | Preview the production build |
 | `pnpm check` | Astro + TypeScript check |
 | `pnpm test:run` | Unit tests (Vitest) |
-| `pnpm posters:capture` | Download amplify MP4s, extract posters, and build same-origin `/streams` for in-site playback |
+| `pnpm posters:capture` | Download amplify MP4s, extract posters, and build local `/streams` for dev playback |
 | `pnpm discovery:dry-run` | Scan X watchlist (needs `X_BEARER_TOKEN`) and print candidates without filing issues |
 | `pnpm discovery:fixture` | Run discovery against the sample fixture (no API key) |
 | `pnpm discovery:seed-inbox` | Seed `src/data/inbox.json` from the fixture (for `/admin` demos) |
 | `pnpm discovery -- --publish --email` | Create GitHub issues, update inbox, optional Resend digest |
 | `pnpm inbox:apply` | Merge **approved** inbox drafts into `videos.json` |
+
+## Deployment
+
+Every push to `main` triggers [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml): build → strip `dist/streams` → `wrangler deploy` to Cloudflare Workers static assets, served on `whatships.com` and `www.whatships.com`.
+
+In-site playback goes through a self-hosted video proxy ([`workers/video-proxy`](workers/video-proxy)) at `proxy.whatships.com`: X's CDN rejects any non-Twitter Referer, so the Worker relays the original `video.twimg.com` media Referer-less. Local `/streams/{slug}.mp4` files are a dev-only fallback and stay out of git.
+
+Required secrets / env:
+
+| Secret / env | Where | Purpose |
+| --- | --- | --- |
+| `CLOUDFLARE_API_TOKEN` | GitHub Actions secret | `wrangler deploy` |
+| `PUBLIC_VIDEO_PROXY_BASE` | Build env | Playback proxy base URL inlined into the bundle |
 
 ## Adding curated videos
 
@@ -37,23 +49,21 @@ Edit `src/data/videos.json`. Each published entry needs:
 - product/company metadata
 - `category` from the allowed list in `src/lib/catalog.ts`
 - `tweetUrl` / `tweetId` for the original X post
-- optional `videoUrl` (amplify MP4) used only by `posters:capture`
+- `videoUrl` (amplify MP4) — used for poster capture and proxied playback
 - `poster` path under `public/posters/`
 - `status: "published"` (drafts stay offline)
 
-After adding a `videoUrl`, capture the poster and local stream:
+After adding a `videoUrl`, capture the poster:
 
 ```bash
 pnpm posters:capture -- --slug=your-slug --force
 ```
 
-Homepage playback uses same-origin files under `public/streams/{slug}.mp4`. Direct X CDN hotlinking is blocked for non-Twitter referers (including localhost), so local streams are required for in-site play.
-
-Detail pages embed the original post via X’s oEmbed API during `pnpm build`. If oEmbed fails, the page falls back to the local poster plus a Watch on X link.
+Detail pages embed the original post via X's oEmbed API during `pnpm build`. If oEmbed fails, the page falls back to the local poster plus a Watch on X link.
 
 ## Submissions
 
-Open `/submit/` to propose a launch. The form validates an X status URL and product metadata, then opens a prefilled GitHub issue on `dingyi/plv` for editorial review. Approved entries are merged into `src/data/videos.json`.
+Open `/submit/` to propose a launch. The form validates an X status URL and product metadata, then opens a prefilled GitHub issue on `dingyi/whatships.com` for editorial review. Approved entries are merged into `src/data/videos.json`.
 
 ## Weekly discovery (admin review + email)
 
@@ -135,7 +145,7 @@ pnpm discovery:dry-run
 
 # Publish: inbox + optional issues + email
 export GITHUB_TOKEN=...
-export GITHUB_REPOSITORY=dingyi/plv
+export GITHUB_REPOSITORY=dingyi/whatships.com
 export RESEND_API_KEY=...
 export NOTIFY_EMAIL=you@example.com
 export DISCOVERY_FROM_EMAIL=plv@yourdomain.com
