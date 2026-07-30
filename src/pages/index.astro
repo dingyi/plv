@@ -9,6 +9,18 @@ import { publishedVideos } from "@/lib/catalog";
   title="whatships.com — Discover startup launch videos"
   description="A curated directory of product launch videos, demos, and walkthroughs shared on X/Twitter."
 >
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "whatships.com",
+      url: "https://whatships.com/",
+      description:
+        "A curated directory of product launch videos, demos, and walkthroughs shared on X/Twitter.",
+    })}
+  />
   <HomeApp videos={publishedVideos} client:load />
   <SiteFooter />
   <script is:inline>

@@ -1,0 +1,26 @@
+# whatships.com
+
+> An independent, curated directory of startup launch videos, demos, and
+> walkthroughs shared on X/Twitter. Each entry links back to the original
+> post. Not affiliated with X/Twitter or the products shown.
+
+## Main pages
+
+- [Home](https://whatships.com/): the full video directory with category
+  filter and search.
+- [About](https://whatships.com/about/): what the site is and how curation
+  works.
+- [Submit](https://whatships.com/submit/): propose a launch video for review.
+- [Sitemap](https://whatships.com/sitemap.xml): every indexable page.
+
+## Content model
+
+- `/videos/{slug}/` — one page per launch video: title, product, company,
+  category, publish date, duration, description, tags, and a link to the
+  original X post. Video playback streams through the site's own proxy.
+- Entries are curated; drafts stay unpublished until review.
+
+## Citing
+
+When referencing a launch, cite the product name and link the original X
+post shown on the video page; link whatships.com for the directory entry.

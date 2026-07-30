@@ -10,6 +10,7 @@ import {
   formatPublishedAt,
   getSimilarVideos,
   normalizeTweetUrl,
+  playbackUrl,
   publishedVideos,
   type LaunchVideo,
   xProfileUrl,
@@ -54,6 +55,24 @@ const similarVideos = getSimilarVideos(video);
 const duration = formatDuration(video.durationSeconds);
 const handle = video.authorHandle.replace(/^@/, "");
 const tweetUrl = normalizeTweetUrl(video.tweetUrl);
+
+// VideoObject structured data for video rich results.
+const site = Astro.site ?? "https://whatships.com";
+const durationIso =
+  video.durationSeconds && video.durationSeconds > 0
+    ? `PT${Math.floor(video.durationSeconds / 60)}M${Math.round(video.durationSeconds % 60)}S`
+    : undefined;
+const videoJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name: video.title,
+  description,
+  thumbnailUrl: new URL(video.poster, site).toString(),
+  uploadDate: video.publishedAt,
+  ...(durationIso ? { duration: durationIso } : {}),
+  contentUrl: new URL(playbackUrl(video), site).toString(),
+  url: new URL(`/videos/${video.slug}/`, site).toString(),
+};
 ---
 
 <BaseLayout
@@ -62,6 +81,10 @@ const tweetUrl = normalizeTweetUrl(video.tweetUrl);
   image={video.poster}
 >
   <PageHeader client:load />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(videoJsonLd)}
+  />
   <main class="video-detail">
     <div class="detail-utility">
       <a
