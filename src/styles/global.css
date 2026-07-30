@@ -1224,24 +1224,44 @@ img {
 }
 
 .about-page {
-  padding: 72px 24px 64px;
+  padding: 56px 24px 80px;
 }
 .about-content {
-  width: min(624px, 100%);
+  width: min(680px, 100%);
   margin: 0 auto;
 }
-.about-content section {
-  padding: 16px 0 17px;
-  border-bottom: 1px solid var(--grid-line);
+.about-intro {
+  margin-bottom: 32px;
 }
-.about-content h2 {
+.about-intro h1 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.about-lead {
+  margin: 12px 0 0;
+  color: var(--muted-foreground);
+  font-size: 16px;
+  line-height: 24px;
+  text-wrap: balance;
+}
+.about-content section {
+  padding: 14px 0;
+}
+.about-content section h2 {
   margin: 0 0 8px;
   color: var(--muted-foreground);
-  font-size: 12px;
-  font-weight: 430;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   line-height: 16px;
+  text-transform: uppercase;
 }
-.about-content p {
+.about-content section p {
   margin: 0;
   color: var(--foreground);
   font-size: 16px;

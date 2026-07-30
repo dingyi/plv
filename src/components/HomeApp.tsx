@@ -264,7 +264,7 @@ export default function HomeApp({ videos }: Props) {
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero__inner">
             <h1 id="hero-title">
-              Discover product launch videos from X
+              Discover startup launch videos from X
             </h1>
             <p className="hero__copy">
               A curated edit of launch films, demos, and walkthroughs that
