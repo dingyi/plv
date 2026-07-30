@@ -1,6 +1,6 @@
 import { CATEGORIES, type CategoryId } from "@/lib/catalog";
 
-export const SUBMIT_REPO = "dingyi/plv";
+export const SUBMIT_REPO = "dingyi/whatships.com";
 export const SUBMIT_ISSUE_LABELS = ["submission"];
 
 export interface LaunchSubmission {

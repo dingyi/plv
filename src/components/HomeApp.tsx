@@ -290,7 +290,7 @@ export default function HomeApp({ videos }: Props) {
                 required
                 aria-label="Newsletter email address"
               />
-              <button type="submit" aria-label="Subscribe to the plv newsletter">
+              <button type="submit" aria-label="Subscribe to the whatships.com newsletter">
                 Subscribe
               </button>
             </form>
@@ -434,7 +434,7 @@ export default function HomeApp({ videos }: Props) {
         <DialogContent className="notice-dialog">
           <DialogTitle>Subscriptions are opening soon.</DialogTitle>
           <DialogDescription>
-            A weekly plv digest is still being prepared. Your email has not
+            A weekly whatships.com digest is still being prepared. Your email has not
             been stored or sent anywhere.
           </DialogDescription>
         </DialogContent>

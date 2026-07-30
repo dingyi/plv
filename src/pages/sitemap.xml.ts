@@ -1,7 +1,7 @@
 import { publishedVideos } from "@/lib/catalog";
 
 export const GET = () => {
-  const base = "https://plv.local";
+  const base = "https://whatships.com";
   const paths = [
     "/",
     "/about/",

@@ -8,11 +8,11 @@ interface Props {
 }
 
 const {
-  title = "Product Launch Videos",
+  title = "whatships.com",
   description = "A curated directory of product launch videos from X/Twitter.",
   image = "/og-default.svg",
 } = Astro.props;
-const site = Astro.site ?? "https://plv.local";
+const site = Astro.site ?? "https://whatships.com";
 const canonicalURL = new URL(Astro.url.pathname, site);
 ---
 

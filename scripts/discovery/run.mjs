@@ -11,7 +11,7 @@
  * Env:
  *   X_BEARER_TOKEN          X API v2 bearer token (required unless --fixture)
  *   GITHUB_TOKEN            create review issues (required with --publish)
- *   GITHUB_REPOSITORY       owner/repo (default: dingyi/plv)
+ *   GITHUB_REPOSITORY       owner/repo (default: dingyi/whatships.com)
  *   RESEND_API_KEY          optional email via Resend
  *   NOTIFY_EMAIL            optional recipient(s), comma-separated
  *   DISCOVERY_FROM_EMAIL    verified Resend from address
@@ -148,7 +148,7 @@ async function main() {
   const repoSlug =
     process.env.DISCOVERY_REPO ||
     process.env.GITHUB_REPOSITORY ||
-    "dingyi/plv";
+    "dingyi/whatships.com";
   const week = discovery.weekLabel();
   let createdIssues = [];
   /** @type {Map<string, string>} */

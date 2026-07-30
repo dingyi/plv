@@ -76,7 +76,7 @@ describe("buildCatalogDraft + issue URL", () => {
     expect(draft?.slug).toContain("linear-loops");
 
     const url = buildGitHubIssueUrl(submission);
-    expect(url).toContain("https://github.com/dingyi/plv/issues/new?");
+    expect(url).toContain("https://github.com/dingyi/whatships.com/issues/new?");
     expect(url).toContain("Launch+video");
     expect(url).toContain("labels=submission");
   });

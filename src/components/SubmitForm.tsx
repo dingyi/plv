@@ -296,11 +296,11 @@ export default function SubmitForm() {
         <p className="submit-footnote">
           Opens a prefilled GitHub issue on{" "}
           <a
-            href="https://github.com/dingyi/plv"
+            href="https://github.com/dingyi/whatships.com"
             target="_blank"
             rel="noreferrer"
           >
-            dingyi/plv
+            dingyi/whatships.com
           </a>
           . Nothing is stored on this site.
         </p>

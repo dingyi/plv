@@ -99,8 +99,8 @@ export default function PageHeader({
               </a>
             </div>
           </div>
-          <a className="wordmark" href="/" aria-label="plv home">
-            plv
+          <a className="wordmark" href="/" aria-label="whatships.com home">
+            whatships.com
           </a>
           <div className="nav-right">
             <ThemeToggle />
