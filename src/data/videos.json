@@ -16530,5 +16530,57 @@
     "durationSeconds": 189,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-zerotake",
+    "slug": "zerotake",
+    "title": "zerotake — a cinema camera app for iPhone",
+    "product": "zerotake",
+    "company": "zerotake",
+    "description": "A new cinema camera app for iPhone, designed to make filmmaking effortless and accessible to everyone.",
+    "category": "consumer",
+    "tags": [
+      "zerotake",
+      "camera",
+      "iphone",
+      "filmmaking"
+    ],
+    "tweetUrl": "https://x.com/novikoff/status/2082753073877749889",
+    "tweetId": "2082753073877749889",
+    "authorName": "Dmitry Novikov 🇺🇦",
+    "authorHandle": "novikoff",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1910233655747727361/gJv0ssrv_400x400.jpg",
+    "poster": "/posters/zerotake.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2082575144472444929/vid/avc1/1920x1080/pi2qULzJN5HTva6S.mp4",
+    "publishedAt": "2026-07-30T09:00:03.000Z",
+    "durationSeconds": 140,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-x-money",
+    "slug": "x-money",
+    "title": "𝕏 Money — your money, on the world’s most powerful network",
+    "product": "𝕏 Money",
+    "company": "X",
+    "description": "𝕏 Money is rolling out to U.S. Premium and Premium+ subscribers.",
+    "category": "consumer",
+    "tags": [
+      "x",
+      "money",
+      "payments",
+      "fintech"
+    ],
+    "tweetUrl": "https://x.com/XMoney/status/2081802002539876506",
+    "tweetId": "2081802002539876506",
+    "authorName": "X Money",
+    "authorHandle": "XMoney",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2041559289458782208/1mGk24um_400x400.jpg",
+    "poster": "/posters/x-money.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2081799044624474112/vid/avc1/802x1052/tTp8PA3cM4Jf0aMY.mp4",
+    "publishedAt": "2026-07-27T18:00:50.000Z",
+    "durationSeconds": 24,
+    "featured": false,
+    "status": "published"
   }
 ]
