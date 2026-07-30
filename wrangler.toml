@@ -1,0 +1,13 @@
+name = "whatships"
+compatibility_date = "2026-07-29"
+
+# Astro static build output, served by Workers Static Assets.
+# Build first: node_modules/.bin/astro build
+[assets]
+directory = "./dist"
+
+# Site custom domains on the whatships.com zone.
+routes = [
+  { pattern = "whatships.com", custom_domain = true },
+  { pattern = "www.whatships.com", custom_domain = true },
+]

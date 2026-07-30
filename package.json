@@ -18,7 +18,8 @@
     "discovery:fixture": "node scripts/discovery/run.mjs --dry-run --lookback-days=30 --fixture=scripts/discovery/fixtures/sample-posts.json",
     "discovery:seed-inbox": "node scripts/discovery/run.mjs --dry-run --write-inbox --lookback-days=30 --fixture=scripts/discovery/fixtures/sample-posts.json",
     "inbox:apply": "node scripts/apply-inbox.mjs",
-    "inbox:apply:dry-run": "node scripts/apply-inbox.mjs --dry-run"
+    "inbox:apply:dry-run": "node scripts/apply-inbox.mjs --dry-run",
+    "deploy": "astro build && rm -rf dist/streams && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.1",
