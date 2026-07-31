@@ -10,9 +10,6 @@ export interface LaunchSubmission {
   category: CategoryId | "";
   title: string;
   description: string;
-  submitterName: string;
-  submitterContact: string;
-  notes: string;
 }
 
 export interface SubmissionErrors {
@@ -22,7 +19,6 @@ export interface SubmissionErrors {
   category?: string;
   title?: string;
   description?: string;
-  submitterContact?: string;
 }
 
 const TWEET_PATH =
@@ -36,9 +32,6 @@ export function emptySubmission(): LaunchSubmission {
     category: "",
     title: "",
     description: "",
-    submitterName: "",
-    submitterContact: "",
-    notes: "",
   };
 }
 
@@ -96,11 +89,6 @@ export function validateSubmission(
 
   if (submission.description.trim().length > 500) {
     errors.description = "Keep the description under 500 characters.";
-  }
-
-  const contact = submission.submitterContact.trim();
-  if (contact && contact.length > 120) {
-    errors.submitterContact = "Keep contact under 120 characters.";
   }
 
   return errors;
@@ -187,12 +175,6 @@ export function buildIssueBody(submission: LaunchSubmission) {
     `- **Category:** ${categoryLabel}`,
     `- **Title:** ${submission.title.trim() || "—"}`,
     `- **Description:** ${submission.description.trim() || "—"}`,
-    "",
-    "### Submitter",
-    "",
-    `- **Name:** ${submission.submitterName.trim() || "—"}`,
-    `- **Contact:** ${submission.submitterContact.trim() || "—"}`,
-    `- **Notes:** ${submission.notes.trim() || "—"}`,
     "",
     "### Suggested catalog draft",
     "",

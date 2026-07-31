@@ -4,6 +4,7 @@ export const CATEGORIES = [
   { id: "ai", label: "AI" },
   { id: "developer-tools", label: "Developer tools" },
   { id: "design", label: "Design" },
+  { id: "motion", label: "Motion" },
   { id: "productivity", label: "Productivity" },
   { id: "consumer", label: "Consumer" },
   { id: "hardware", label: "Hardware" },

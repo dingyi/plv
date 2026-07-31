@@ -2268,7 +2268,7 @@
     "product": "Poke",
     "company": "Interaction",
     "description": "After almost two years in Palo Alto, Interaction is moving to San Francisco.",
-    "category": "consumer",
+    "category": "motion",
     "tags": [
       "poke",
       "interaction",
@@ -2293,7 +2293,7 @@
     "product": "Design demo",
     "company": "Mark Vassilevskiy",
     "description": "A hyper-real 3D keyboard render from Mark Vassilevskiy — the kind of craft, he says, Kimi 3 could never do.",
-    "category": "design",
+    "category": "motion",
     "tags": [
       "demo",
       "design",
@@ -2447,7 +2447,7 @@
     "product": "Design demo",
     "company": "Mark Vassilevskiy",
     "description": "A design-engineering demo from Mark Vassilevskiy.",
-    "category": "design",
+    "category": "motion",
     "tags": [
       "demo",
       "design",
@@ -16461,7 +16461,7 @@
     "product": "Launch reel",
     "company": "Benji Taylor",
     "description": "A reel of recent launch videos from Benji Taylor's in-house motion design team.",
-    "category": "design",
+    "category": "motion",
     "tags": [
       "motion",
       "launch-videos",
@@ -17551,7 +17551,7 @@
     "product": "Applied Electrodynamics",
     "company": "Bilgehan Avser",
     "description": "What would the world look like if we could see beyond visible light, across the entire electromagnetic spectrum? A visual exploration of how waves interact with matter.",
-    "category": "design",
+    "category": "motion",
     "tags": [
       "electrodynamics",
       "visualization",
@@ -17576,7 +17576,7 @@
     "product": "Farewell film",
     "company": "Cole",
     "description": "Cole's farewell film after 1.5 years designing at Shopify — more on what's next soon.",
-    "category": "design",
+    "category": "motion",
     "tags": [
       "shopify",
       "farewell",
@@ -17601,7 +17601,7 @@
     "product": "Brand launch videos",
     "company": "Alex Socoloff",
     "description": "Alex Socoloff on why every brand he launches now comes with a launch video — first impressions hit harder in motion.",
-    "category": "design",
+    "category": "motion",
     "tags": [
       "branding",
       "launch-videos",

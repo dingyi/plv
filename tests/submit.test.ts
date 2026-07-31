@@ -49,9 +49,6 @@ describe("validateSubmission", () => {
       category: "productivity",
       title: "Linear Loops",
       description: "Recurring workflows",
-      submitterName: "Ada",
-      submitterContact: "ada@example.com",
-      notes: "",
     });
     expect(errors).toEqual({});
   });
@@ -66,9 +63,6 @@ describe("buildCatalogDraft + issue URL", () => {
       category: "productivity" as const,
       title: "",
       description: "",
-      submitterName: "",
-      submitterContact: "",
-      notes: "",
     };
     const draft = buildCatalogDraft(submission);
     expect(draft?.status).toBe("draft");

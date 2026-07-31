@@ -240,53 +240,6 @@ export default function SubmitForm() {
         </label>
       </fieldset>
 
-      <fieldset className="submit-fieldset">
-        <legend>About you</legend>
-        <div className="submit-grid">
-          <label className="submit-field">
-            <span>
-              Name <small>optional</small>
-            </span>
-            <Input
-              name="submitterName"
-              placeholder="Your name"
-              value={form.submitterName}
-              onChange={(event) => update("submitterName", event.target.value)}
-            />
-          </label>
-          <label className="submit-field">
-            <span>
-              Contact <small>optional</small>
-            </span>
-            <Input
-              name="submitterContact"
-              placeholder="email or @handle"
-              value={form.submitterContact}
-              aria-invalid={touched && Boolean(errors.submitterContact)}
-              onChange={(event) =>
-                update("submitterContact", event.target.value)
-              }
-            />
-            {touched && errors.submitterContact && (
-              <em className="submit-error">{errors.submitterContact}</em>
-            )}
-          </label>
-        </div>
-        <label className="submit-field">
-          <span>
-            Notes for editors <small>optional</small>
-          </span>
-          <textarea
-            className="submit-textarea"
-            name="notes"
-            rows={3}
-            placeholder="Anything else we should know?"
-            value={form.notes}
-            onChange={(event) => update("notes", event.target.value)}
-          />
-        </label>
-      </fieldset>
-
       <div className="submit-actions">
         <Button type="submit" className="submit-button" size="lg">
           Continue to GitHub
