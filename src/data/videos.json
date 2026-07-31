@@ -16946,5 +16946,31 @@
     "durationSeconds": 21,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-wondering",
+    "slug": "wondering",
+    "title": "Wondering — Duolingo for learning anything",
+    "product": "Wondering",
+    "company": "Wondering",
+    "description": "Duolingo for learning anything — launched in Y Combinator.",
+    "category": "consumer",
+    "tags": [
+      "wondering",
+      "learning",
+      "yc",
+      "education"
+    ],
+    "tweetUrl": "https://x.com/aka_kosasih/status/2082907964990804075",
+    "tweetId": "2082907964990804075",
+    "authorName": "Angelica",
+    "authorHandle": "aka_kosasih",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2080059753494114304/vnxjJHcU_400x400.jpg",
+    "poster": "/posters/wondering.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2082907848187781120/vid/avc1/1920x1080/lvqnS5l0DDbsD6Va.mp4",
+    "publishedAt": "2026-07-30T19:15:32.000Z",
+    "durationSeconds": 52,
+    "featured": false,
+    "status": "published"
   }
 ]
