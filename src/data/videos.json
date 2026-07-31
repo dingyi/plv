@@ -17491,5 +17491,57 @@
     "durationSeconds": 107,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-clonk-loops",
+    "slug": "clonk-loops",
+    "title": "Clonk Loops — fully autonomous agentic dev loops",
+    "product": "Clonk Loops",
+    "company": "Clonk",
+    "description": "Fully autonomous agentic dev loops: no prompting, no babysitting — it just clonks until the app or feature is done.",
+    "category": "developer-tools",
+    "tags": [
+      "clonk",
+      "agents",
+      "loops",
+      "autonomous"
+    ],
+    "tweetUrl": "https://x.com/0xPaulius/status/2067726755956207717",
+    "tweetId": "2067726755956207717",
+    "authorName": "Paulius 🏴‍☠️",
+    "authorHandle": "0xPaulius",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2082579156097699840/5768_hb4_400x400.jpg",
+    "poster": "/posters/clonk-loops.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2067726672346918912/vid/avc1/1640x1080/kovVwSfB93H5e8up.mp4",
+    "publishedAt": "2026-06-18T21:50:49.000Z",
+    "durationSeconds": 36,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-marble-restaurants",
+    "slug": "marble-restaurants",
+    "title": "Marble (YC S26) — the autonomous back of house for restaurants",
+    "product": "Marble",
+    "company": "Marble",
+    "description": "Marble counts your stock in minutes with computer vision — the autonomous back of house for restaurants, launching in YC S26.",
+    "category": "ai",
+    "tags": [
+      "marble",
+      "restaurants",
+      "yc",
+      "computer-vision"
+    ],
+    "tweetUrl": "https://x.com/arjunjchaliha/status/2082895107557339601",
+    "tweetId": "2082895107557339601",
+    "authorName": "Arjun Chaliha",
+    "authorHandle": "arjunjchaliha",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2081951924325429248/aROF3TnF_400x400.jpg",
+    "poster": "/posters/marble-restaurants.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2082889985909469184/vid/avc1/1920x1080/xGe4SJEoMCzCI7oh.mp4",
+    "publishedAt": "2026-07-30T18:24:26.000Z",
+    "durationSeconds": 82,
+    "featured": false,
+    "status": "published"
   }
 ]
