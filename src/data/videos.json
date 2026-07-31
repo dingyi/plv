@@ -16894,5 +16894,57 @@
     "durationSeconds": 109,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-dreamina-seedance-2-5-live",
+    "slug": "dreamina-seedance-2-5-live",
+    "title": "Dreamina Seedance 2.5 — now live",
+    "product": "Seedance 2.5",
+    "company": "BytePlus",
+    "description": "Seedance 2.5 is live on Dreamina: native 30-second generation and more precise control. Enterprise API access via BytePlus coming soon.",
+    "category": "ai",
+    "tags": [
+      "seedance",
+      "dreamina",
+      "byteplus",
+      "video-generation"
+    ],
+    "tweetUrl": "https://x.com/BytePlusGlobal/status/2083069262969844158",
+    "tweetId": "2083069262969844158",
+    "authorName": "BytePlus",
+    "authorHandle": "BytePlusGlobal",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2076879408246493184/APDqyR2i_400x400.jpg",
+    "poster": "/posters/dreamina-seedance-2-5-live.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2083066957230915584/vid/avc1/1920x1080/zZsdVGKyrSR_dEC5.mp4",
+    "publishedAt": "2026-07-31T05:56:28.000Z",
+    "durationSeconds": 275,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-linear-mobile-coding-sessions",
+    "slug": "linear-mobile-coding-sessions",
+    "title": "Linear — coding sessions on mobile",
+    "product": "Linear",
+    "company": "Linear",
+    "description": "Keep work moving from the Linear mobile app: review code changes, comment on specific lines, and send feedback directly to the agent.",
+    "category": "developer-tools",
+    "tags": [
+      "linear",
+      "mobile",
+      "agents",
+      "code-review"
+    ],
+    "tweetUrl": "https://x.com/linear/status/2082856036977803595",
+    "tweetId": "2082856036977803595",
+    "authorName": "Linear",
+    "authorHandle": "linear",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1882353118530224128/l8meBvMg_400x400.jpg",
+    "poster": "/posters/linear-mobile-coding-sessions.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2082855724443389952/vid/avc1/1920x1080/qe8TS6NqAOdhbI0R.mp4",
+    "publishedAt": "2026-07-30T15:49:11.000Z",
+    "durationSeconds": 21,
+    "featured": false,
+    "status": "published"
   }
 ]
