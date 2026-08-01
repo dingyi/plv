@@ -17696,5 +17696,31 @@
     "durationSeconds": 23,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-madethis",
+    "slug": "madethis",
+    "title": "MadeThis — turn any idea into a business that runs itself",
+    "product": "MadeThis",
+    "company": "MadeThis",
+    "description": "Over 20,000 businesses launched on MadeThis in the last 100 days — from first-time founders to owners doing $50M+ a year.",
+    "category": "ai",
+    "tags": [
+      "madethis",
+      "business",
+      "agents",
+      "no-code"
+    ],
+    "tweetUrl": "https://x.com/jehovahscript/status/2082868450847031354",
+    "tweetId": "2082868450847031354",
+    "authorName": "jacob ۞",
+    "authorHandle": "jehovahscript",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1861663009749508099/7iyCyYFB_400x400.jpg",
+    "poster": "/posters/madethis.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2082864379016736768/vid/avc1/1920x1080/CutZcfGa72btNCJf.mp4",
+    "publishedAt": "2026-07-30T16:38:31.000Z",
+    "durationSeconds": 80,
+    "featured": false,
+    "status": "published"
   }
 ]
