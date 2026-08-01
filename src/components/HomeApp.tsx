@@ -15,7 +15,6 @@ import VideoSearch, {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
 import {
@@ -153,7 +152,6 @@ export default function HomeApp({ videos }: Props) {
   const [category, setCategory] = useState("all");
   const [page, setPage] = useState(1);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [newsletterOpen, setNewsletterOpen] = useState(false);
   const [playingVideo, setPlayingVideo] = useState<LaunchVideo | null>(null);
   const [ready, setReady] = useState(false);
 
@@ -280,30 +278,6 @@ export default function HomeApp({ videos }: Props) {
               A curated edit of launch films, demos, and walkthroughs that
               introduce new products to the world.
             </p>
-            <form
-              className="hero__subscribe"
-              aria-label="Newsletter subscription"
-              onSubmit={(event) => {
-                event.preventDefault();
-                setNewsletterOpen(true);
-              }}
-            >
-              <label className="sr-only" htmlFor="newsletter-email">
-                Newsletter email address
-              </label>
-              <input
-                id="newsletter-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder="name@email.com"
-                required
-                aria-label="Newsletter email address"
-              />
-              <button type="submit" aria-label="Subscribe to the whatships.com newsletter">
-                Subscribe
-              </button>
-            </form>
           </div>
         </section>
 
@@ -441,21 +415,28 @@ export default function HomeApp({ videos }: Props) {
           />
         </DialogContent>
       </Dialog>
-      <Dialog open={newsletterOpen} onOpenChange={setNewsletterOpen}>
-        <DialogContent className="notice-dialog">
-          <DialogTitle>Subscriptions are opening soon.</DialogTitle>
-          <DialogDescription>
-            A weekly whatships.com digest is still being prepared. Your email has not
-            been stored or sent anywhere.
-          </DialogDescription>
-        </DialogContent>
-      </Dialog>
       <VideoPlayerDialog
         video={playingVideo}
         open={Boolean(playingVideo)}
         onOpenChange={(open) => {
           if (!open) setPlayingVideo(null);
         }}
+        onNavigate={
+          filtered.length > 1
+            ? (direction) => {
+                setPlayingVideo((current) => {
+                  const index = current
+                    ? filtered.findIndex((item) => item.id === current.id)
+                    : -1;
+                  const next =
+                    filtered[
+                      (index + direction + filtered.length) % filtered.length
+                    ];
+                  return next ?? current;
+                });
+              }
+            : undefined
+        }
       />
     </>
   );

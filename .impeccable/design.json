@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-01T11:39:54.182Z",
+  "title": "Design System: whatships.com",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#fafafa",
+        "tonalRamp": ["#09090b", "#18181b", "#27272a", "#3f3f46", "#52525b", "#a1a1aa", "#e4e4e7", "#fafafa"]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Ink",
+        "canonical": "#09090b",
+        "tonalRamp": ["#09090b", "#18181b", "#27272a", "#3f3f46", "#52525b", "#71717a", "#a1a1aa", "#d4d4d8"]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Ink Soft",
+        "canonical": "#71717a",
+        "tonalRamp": ["#18181b", "#27272a", "#3f3f46", "#52525b", "#71717a", "#a1a1aa", "#d4d4d8", "#f4f4f5"]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#d4d4d8",
+        "tonalRamp": ["#27272a", "#3f3f46", "#52525b", "#71717a", "#a1a1aa", "#d4d4d8", "#e4e4e7", "#f4f4f5"]
+      },
+      "focus-ring": {
+        "role": "primary",
+        "displayName": "Focus Ring",
+        "canonical": "#4f7bff",
+        "tonalRamp": ["#1a3a8f", "#2b4fb8", "#3f68d9", "#5480f2", "#6b97ff", "#93b3ff", "#bccfff", "#e3ebff"]
+      },
+      "destructive": {
+        "role": "neutral",
+        "displayName": "Destructive",
+        "canonical": "#ef4444",
+        "tonalRamp": ["#450a0a", "#7f1d1d", "#b91c1c", "#dc2626", "#ef4444", "#f87171", "#fca5a5", "#fee2e2"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Video detail page title only; one per page." },
+      "headline": { "displayName": "Headline", "purpose": "Homepage hero." },
+      "title": { "displayName": "Title", "purpose": "About/submit page headings." },
+      "body": { "displayName": "Body", "purpose": "Prose on reading pages; containers capped at 680px." },
+      "label": { "displayName": "Label", "purpose": "The voice of the chrome: nav, buttons, eyebrows, meta rows. Mono, uppercase." }
+    },
+    "shadows": [
+      { "name": "hairline-ring", "value": "0 0 0 1px rgb(0 0 0 / 0.06)", "purpose": "Resting cards and popovers; every elevated surface keeps this ring." },
+      { "name": "raised-panel", "value": "0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 1px -0.5px rgb(0 0 0 / 0.06), 0 3px 3px -1.5px rgb(0 0 0 / 0.06), 0 6px 6px -3px rgb(0 0 0 / 0.06)", "purpose": "Mobile nav menu, sticky overlays (shadow-4)." },
+      { "name": "dialog", "value": "0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 1px -0.5px rgb(0 0 0 / 0.06), 0 3px 3px -1.5px rgb(0 0 0 / 0.06), 0 6px 6px -3px rgb(0 0 0 / 0.06), 0 12px 12px -6px rgb(0 0 0 / 0.06), 0 24px 24px -12px rgb(0 0 0 / 0.06)", "purpose": "Search palette and player dialog (shadow-6)." },
+      { "name": "cinema", "value": "0 40px 120px rgb(0 0 0 / 60%)", "purpose": "Homepage video modal stage only — the one heavy shadow allowed." }
+    ],
+    "motion": [
+      { "name": "duration-micro", "value": "80ms", "purpose": "Button press scale, icon stroke-width shifts." },
+      { "name": "duration-quick", "value": "150ms", "purpose": "Closes and hover fades; exits are faster than entries." },
+      { "name": "duration-fast", "value": "250ms", "purpose": "Dialog/menu entries with travel (rise + scale)." },
+      { "name": "ease-smooth-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Default easing for entries and state transitions." },
+      { "name": "spring-fast", "value": "spring duration 0.08, bounce 0", "purpose": "Framer Motion tier for micro interactions." },
+      { "name": "spring-moderate", "value": "spring duration 0.16, bounce 0", "purpose": "Critically damped tier for panels/sheets that must settle precisely." },
+      { "name": "spring-slow", "value": "spring duration 0.24, bounce 0.12", "purpose": "Largest permissible tier; bounce never exceeds 0.12." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "699px" },
+      { "name": "admin-collapse", "value": "860px" },
+      { "name": "player-slim", "value": "599px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ink-filled square action for the public chrome (nav submit, empty-state CTA).",
+      "html": "<button class=\"ds-btn-primary\">SUBMIT A VIDEO</button>",
+      "css": ".ds-btn-primary { height: 34px; padding: 0 14px; border: 0.5px solid #09090b; border-radius: 0; background: #09090b; color: #fafafa; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: opacity 120ms ease; } .ds-btn-primary:hover { opacity: 0.88; } .ds-btn-primary:focus-visible { outline: 1px solid #6b97ff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Hairline square control for toolbar-level actions (theme toggle, search trigger).",
+      "html": "<button class=\"ds-btn-ghost\">⌘K SEARCH</button>",
+      "css": ".ds-btn-ghost { height: 34px; padding: 0 12px; border: 0.5px solid #d4d4d8; border-radius: 0; background: #f4f4f5; color: #71717a; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: background 120ms ease, color 120ms ease, border-color 120ms ease; } .ds-btn-ghost:hover { background: #e4e4e7; color: #09090b; border-color: #a1a1aa; } .ds-btn-ghost:focus-visible { outline: 1px solid #6b97ff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Square hairline input used by the submit form and admin login.",
+      "html": "<input class=\"ds-field\" type=\"text\" placeholder=\"https://x.com/…\" />",
+      "css": ".ds-field { width: 100%; height: 42px; padding: 0 12px; border: 0.5px solid #d4d4d8; border-radius: 0; background: #ffffff; color: #09090b; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; box-shadow: none; } .ds-field::placeholder { color: #71717a; } .ds-field:focus-visible { outline: 1px solid #6b97ff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Video Grid Card",
+      "kind": "card",
+      "refersTo": "card-grid-cell",
+      "description": "The directory cell: square, flat, on the shared 1px grid channel with L-bracket corners.",
+      "html": "<article class=\"ds-card\"><span class=\"ds-corner ds-c1\"></span><span class=\"ds-corner ds-c2\"></span><span class=\"ds-corner ds-c3\"></span><span class=\"ds-corner ds-c4\"></span><div class=\"ds-card-media\"><span class=\"ds-card-duration\">0:50</span></div><h3 class=\"ds-card-title\">Paper — start from site, Figma, or codebase</h3><p class=\"ds-card-meta\"><span class=\"ds-card-dot\"></span>DESIGN · JUL 27</p></article>",
+      "css": ".ds-card { position: relative; padding: 12px; background: #fafafa; } .ds-corner { position: absolute; width: 5px; height: 5px; border: 1px solid #52525b; pointer-events: none; } .ds-c1 { top: -1px; left: -1px; border-right: none; border-bottom: none; } .ds-c2 { top: -1px; right: -1px; border-left: none; border-bottom: none; } .ds-c3 { bottom: -1px; right: -1px; border-left: none; border-top: none; } .ds-c4 { bottom: -1px; left: -1px; border-right: none; border-top: none; } .ds-card-media { position: relative; aspect-ratio: 16 / 9; border: 1px solid #e4e4e7; background: #f4f4f5; } .ds-card-duration { position: absolute; right: 8px; bottom: 8px; padding: 3px 6px; border: 0.5px solid rgb(255 255 255 / 20%); background: rgb(0 0 0 / 72%); color: #fafafa; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; } .ds-card-title { margin: 12px 0 0; color: #09090b; font-family: 'Geist Variable', 'Geist', system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: -0.01em; line-height: 18px; } .ds-card-meta { display: flex; align-items: center; gap: 5px; margin: 4px 0 0; color: #71717a; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; } .ds-card-dot { width: 8px; height: 8px; background: #09090b; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip-filter",
+      "description": "Pill filter used in the admin review queue; active state inverts to ink.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip is-active\">PENDING <span>4</span></button><button class=\"ds-chip\">APPROVED <span>12</span></button></div>",
+      "css": ".ds-chips { display: flex; gap: 8px; } .ds-chip { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px; border: 0; border-radius: 999px; background: #f4f4f5; color: #71717a; font-family: 'Geist Variable', 'Geist', system-ui, sans-serif; font-size: 13px; cursor: pointer; } .ds-chip span { color: #a1a1aa; font-variant-numeric: tabular-nums; } .ds-chip.is-active { background: #09090b; color: #fafafa; } .ds-chip:focus-visible { outline: 1px solid #6b97ff; outline-offset: 2px; }"
+    },
+    {
+      "name": "Site Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Sticky 56px header: hairline bottom border, blurred translucency, centered mono wordmark.",
+      "html": "<nav class=\"ds-nav\"><span></span><span class=\"ds-wordmark\">WHATSHIPS.COM</span><span class=\"ds-links\"><a href=\"#\" class=\"is-active\">INDEX</a><a href=\"#\">ABOUT</a></span></nav>",
+      "css": ".ds-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 56px; padding: 0 16px; border-bottom: 0.5px solid #d4d4d8; background: rgb(250 250 250 / 92%); backdrop-filter: blur(10px); } .ds-wordmark { justify-self: center; color: #09090b; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; } .ds-links { justify-self: end; display: flex; gap: 18px; } .ds-links a { padding: 8px 0; color: #71717a; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; transition: color 120ms ease; } .ds-links a:hover, .ds-links a.is-active { color: #09090b; }"
+    },
+    {
+      "name": "Search Palette Dialog",
+      "kind": "custom",
+      "refersTo": "dialog",
+      "description": "The rounded overlay world: 16px radius, shadow-6, zero padding, hairline-separated results.",
+      "html": "<div class=\"ds-dialog\"><div class=\"ds-dialog-row\"><input class=\"ds-dialog-input\" placeholder=\"Search launches…\" /></div><div class=\"ds-dialog-results\"><div class=\"ds-result\"><strong>Kimi K3 — open weights</strong><small>AI · MOONSHOT AI</small></div><div class=\"ds-result\"><strong>Paper — start from site</strong><small>DESIGN · PAPER</small></div></div></div>",
+      "css": ".ds-dialog { width: min(628px, 100%); overflow: hidden; border-radius: 16px; background: #ffffff; box-shadow: 0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 1px -0.5px rgb(0 0 0 / 0.06), 0 3px 3px -1.5px rgb(0 0 0 / 0.06), 0 6px 6px -3px rgb(0 0 0 / 0.06), 0 12px 12px -6px rgb(0 0 0 / 0.06), 0 24px 24px -12px rgb(0 0 0 / 0.06); } .ds-dialog-row { display: grid; height: 44px; align-items: center; padding: 0 14px; } .ds-dialog-input { height: 44px; border: 0; background: transparent; font-size: 14px; outline: 0; } .ds-dialog-results { padding: 7px; border-top: 1px solid #d4d4d8; } .ds-result { display: block; padding: 9px 12px 10px; border-radius: 10px; cursor: pointer; } .ds-result:hover { background: #f4f4f5; } .ds-result strong { display: block; font-size: 13px; font-weight: 520; line-height: 18px; } .ds-result small { display: block; margin-top: 2px; color: #71717a; font-size: 11px; line-height: 15px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Launch Ledger",
+    "overview": "The site is an archival index, and it looks like one: a flat, monochrome ledger of launch films ruled by continuous hairline grid lines, annotated in uppercase mono micro-labels, and interrupted only by the video posters themselves. The chrome borrows noiced.com's vocabulary — square corners, 0.5px grid lines, 5×5 L-bracket corners straddling every cell — and keeps it absolutely quiet so the poster art carries all the color on the page.\n\nTwo shape worlds coexist deliberately. The public chrome (nav, toolbar, grid, cards, form fields) is perfectly square with hairline borders. The overlay world (dialogs, the video player, search palette, the admin review tool) is softly rounded (10–18px) and elevated with a tonal shadow ladder — overlays float above the ledger, so they are allowed to feel like a different material.",
+    "keyCharacteristics": [
+      "Monochrome zinc palette; the posters are the only imagery and the only color",
+      "Continuous 1px grid channels, not per-card borders; L-bracket corner marks",
+      "Mono 11px uppercase micro-labels for all metadata, nav, and actions",
+      "Square public chrome; rounded, shadowed overlays",
+      "Full light/dark inversion via an 11-step neutral ladder",
+      "Motion from a shared token scale; critically damped, never bouncy in UI chrome"
+    ],
+    "rules": [
+      { "name": "The Zero-Accent Rule", "body": "No brand color exists. Emphasis is typographic (mono labels) and tonal (ink on paper), never chromatic. The focus ring is the sole exception and it must stay invisible until keyboard focus.", "section": "colors" },
+      { "name": "The Posters-Are-the-Palette Rule", "body": "Color enters the page only through captured poster art. Never add colored badges, gradients, or category hues to the chrome; category identity is a small ink square, not a color code.", "section": "colors" },
+      { "name": "The Mono-Is-Chrome Rule", "body": "If text labels the interface rather than the content, it is IBM Plex Mono, 11px, uppercase, 0.04em tracking. Interface copy never uses sentence case in the public chrome.", "section": "typography" },
+      { "name": "The No-Bold Rule", "body": "Emphasis tops out at 560–600. Nothing on the site sets 700+.", "section": "typography" },
+      { "name": "The Flat-Ledger Rule", "body": "Grid cells, fields, and toolbar controls take no shadow — ever. Elevation starts at dialogs and floating menus.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do paint grid lines once via container background + 1px gap; give every cell four L-bracket corners.",
+      "Do set interface text in mono 11px uppercase with 0.04em tracking.",
+      "Do keep public chrome square and flat; reserve radius and shadow for overlays.",
+      "Do use the motion tokens (--duration-quick/fast, --ease-smooth-out) and the spring tiers (fast 80ms, moderate 160ms, slow 240ms, bounce ≤ 0.12) for any new animation.",
+      "Do honor prefers-reduced-motion (all durations collapse to 0.01ms) and keep touch fallbacks for every hover-only reveal."
+    ],
+    "donts": [
+      "Don't introduce a brand hue or colored category coding — the posters are the palette.",
+      "Don't round corners or add shadows in the public grid, toolbar, or form chrome.",
+      "Don't use per-card borders in the grid (half-border doubling on fractional tracks); the channel is the border.",
+      "Don't set font-weight above 600 or sentence-case interface labels.",
+      "Don't hotlink remote thumbnails; posters are local 16:9 captures only."
+    ]
+  }
+}

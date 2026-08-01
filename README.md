@@ -16,7 +16,7 @@ Open [http://localhost:4321](http://localhost:4321).
 | Command | Description |
 | --- | --- |
 | `pnpm dev` | Start the Astro dev server |
-| `pnpm build` | Production static build (fetches X oEmbed at build time) |
+| `pnpm build` | Production static build |
 | `pnpm deploy` | Build, strip local streams, and deploy to Cloudflare Workers |
 | `pnpm preview` | Preview the production build |
 | `pnpm check` | Astro + TypeScript check |
@@ -59,7 +59,7 @@ After adding a `videoUrl`, capture the poster:
 pnpm posters:capture -- --slug=your-slug --force
 ```
 
-Detail pages embed the original post via X's oEmbed API during `pnpm build`. If oEmbed fails, the page falls back to the local poster plus a Watch on X link.
+Detail pages play the video in-site through the proxy (click-to-play; no autoplay on load) and always link out to the original X post.
 
 ## Submissions
 

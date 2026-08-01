@@ -1,4 +1,4 @@
-import { ExternalLink, LoaderCircle, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, LoaderCircle, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -14,6 +14,8 @@ interface Props {
   video: LaunchVideo | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /** When provided, prev/next controls step through the caller's list. */
+  onNavigate?: (direction: 1 | -1) => void;
 }
 
 type PlayerStatus = "idle" | "loading" | "ready" | "error";
@@ -31,9 +33,12 @@ export default function VideoPlayerDialog({
   video,
   open,
   onOpenChange,
+  onNavigate,
 }: Props) {
   const titleId = useId();
   const playerRef = useRef<HTMLVideoElement | null>(null);
+  const closeRef = useRef<HTMLButtonElement | null>(null);
+  const restoreFocusRef = useRef<Element | null>(null);
   const [status, setStatus] = useState<PlayerStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -57,6 +62,21 @@ export default function VideoPlayerDialog({
     setMounted(true);
   }, []);
 
+  // Move focus into the dialog on open and return it to the trigger on close.
+  useEffect(() => {
+    if (open && rendered) {
+      restoreFocusRef.current = document.activeElement;
+      closeRef.current?.focus();
+    }
+  }, [open, rendered]);
+
+  useEffect(() => {
+    if (rendered) return;
+    const trigger = restoreFocusRef.current;
+    if (trigger instanceof HTMLElement) trigger.focus({ preventScroll: true });
+    restoreFocusRef.current = null;
+  }, [rendered]);
+
   useEffect(() => {
     if (open || !rendered) return;
     setClosing(true);
@@ -73,6 +93,12 @@ export default function VideoPlayerDialog({
       if (event.key === "Escape") {
         event.preventDefault();
         onOpenChange(false);
+      } else if (event.key === "ArrowLeft" && onNavigate) {
+        event.preventDefault();
+        onNavigate(-1);
+      } else if (event.key === "ArrowRight" && onNavigate) {
+        event.preventDefault();
+        onNavigate(1);
       }
     };
     const previousOverflow = document.body.style.overflow;
@@ -82,7 +108,7 @@ export default function VideoPlayerDialog({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open, onOpenChange]);
+  }, [open, onOpenChange, onNavigate]);
 
   useEffect(() => {
     const player = playerRef.current;
@@ -111,7 +137,12 @@ export default function VideoPlayerDialog({
       setStatus("ready");
       try {
         // The modal opens from a click, so unmuted autoplay is normally
-        // allowed by the browser's user-activation policy.
+        // allowed by the browser's user-activation policy. Users who prefer
+        // reduced motion get a muted start instead of a sound-and-motion
+        // surprise.
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          player.muted = true;
+        }
         await player.play();
       } catch {
         try {
@@ -176,6 +207,27 @@ export default function VideoPlayerDialog({
             Your browser does not support video playback.
           </video>
 
+          {onNavigate && (
+            <>
+              <button
+                type="button"
+                className="video-player-modal__nav video-player-modal__nav--prev"
+                onClick={() => onNavigate(-1)}
+                aria-label="Previous video"
+              >
+                <ArrowLeft size={18} />
+              </button>
+              <button
+                type="button"
+                className="video-player-modal__nav video-player-modal__nav--next"
+                onClick={() => onNavigate(1)}
+                aria-label="Next video"
+              >
+                <ArrowRight size={18} />
+              </button>
+            </>
+          )}
+
           {/* Cinema overlays: hidden until the stage is hovered or focused,
               always visible on touch devices (see CSS hover:none rule). */}
           <div className="video-player-modal__overlay video-player-modal__overlay--top">
@@ -214,6 +266,7 @@ export default function VideoPlayerDialog({
               <button
                 type="button"
                 className="video-player-modal__close"
+                ref={closeRef}
                 onClick={() => onOpenChange(false)}
                 aria-label="Close player"
               >

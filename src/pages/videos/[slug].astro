@@ -1,8 +1,8 @@
 ---
 import { ArrowUpRight, Play } from "lucide-react";
+import DetailPlayer from "@/components/DetailPlayer";
 import PageHeader from "@/components/PageHeader";
 import SiteFooter from "@/components/SiteFooter.astro";
-import TweetEmbed from "@/components/TweetEmbed.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import {
   categoryLabel,
@@ -15,35 +15,27 @@ import {
   type LaunchVideo,
   xProfileUrl,
 } from "@/lib/catalog";
-import { fetchTweetOEmbed } from "@/lib/oembed";
 
 export async function getStaticPaths() {
   const total = publishedVideos.length;
 
-  return await Promise.all(
-    publishedVideos.map(async (video, index) => {
-      const oembed = await fetchTweetOEmbed(normalizeTweetUrl(video.tweetUrl));
-      return {
-        params: { slug: video.slug },
-        props: {
-          video,
-          position: index + 1,
-          total,
-          oembedHtml: oembed?.html ?? null,
-        },
-      };
-    }),
-  );
+  return publishedVideos.map((video, index) => ({
+    params: { slug: video.slug },
+    props: {
+      video,
+      position: index + 1,
+      total,
+    },
+  }));
 }
 
 interface Props {
   video: LaunchVideo;
   position: number;
   total: number;
-  oembedHtml: string | null;
 }
 
-const { video, position, total, oembedHtml } = Astro.props;
+const { video, position, total } = Astro.props;
 const description =
   video.description ||
   `${video.title} — a product launch video from ${video.company} on X.`;
@@ -114,37 +106,7 @@ const videoJsonLd = {
     </div>
 
     <article class="detail-profile" aria-labelledby="video-title">
-      {
-        oembedHtml ? (
-          <TweetEmbed
-            html={oembedHtml}
-            fallbackHref={tweetUrl}
-            fallbackLabel="Open original post on X"
-          />
-        ) : (
-          <figure class="detail-media">
-            <img
-              src={video.poster}
-              alt={`Poster for ${video.title}`}
-              width="1440"
-              height="810"
-            />
-            <a
-              class="detail-play-link"
-              href={tweetUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`Watch ${video.title} on X`}
-            >
-              <span>
-                <Play size={16} fill="currentColor" aria-hidden="true" />
-                Watch on X
-                {duration && <span aria-hidden="true">· {duration}</span>}
-              </span>
-            </a>
-          </figure>
-        )
-      }
+      <DetailPlayer client:load video={video} />
 
       <h1 id="video-title">{video.title}</h1>
 
@@ -238,7 +200,7 @@ const videoJsonLd = {
                 <div class="video-card__media">
                   <img
                     src={similar.poster.replace(/\.webp$/, "-960.webp")}
-                    srcSet={`${similar.poster.replace(/\.webp$/, "-960.webp")} 960w, ${similar.poster} 1440w`}
+                    srcset={`${similar.poster.replace(/\.webp$/, "-960.webp")} 960w, ${similar.poster} 1440w`}
                     sizes="(max-width: 699px) calc(100vw - 34px), 300px"
                     alt={`Poster for ${similar.title}`}
                     loading="lazy"

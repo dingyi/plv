@@ -249,7 +249,7 @@ export default function AdminApp({
                 autoComplete="current-password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                placeholder="ADMIN_PASSWORD"
+                placeholder="Admin password"
               />
             </label>
           ) : null}
@@ -300,7 +300,7 @@ export default function AdminApp({
         </p>
       ) : null}
 
-      <div className="admin-filters" role="tablist" aria-label="Review status">
+      <div className="admin-filters" role="group" aria-label="Review status">
         {(
           [
             ["pending", "Pending"],
@@ -312,8 +312,7 @@ export default function AdminApp({
           <button
             key={id}
             type="button"
-            role="tab"
-            aria-selected={filter === id}
+            aria-pressed={filter === id}
             className={filter === id ? "is-active" : ""}
             onClick={() => setFilter(id)}
           >

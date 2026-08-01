@@ -16,6 +16,7 @@ interface Props {
   onValueChange: (value: string) => void;
   onClose: () => void;
   loading?: boolean;
+  error?: boolean;
 }
 
 export default function VideoSearch({
@@ -24,6 +25,7 @@ export default function VideoSearch({
   onValueChange,
   onClose,
   loading = false,
+  error = false,
 }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
   const query = value.trim().toLocaleLowerCase();
@@ -72,7 +74,14 @@ export default function VideoSearch({
           onChange={(event) => onValueChange(event.target.value)}
           placeholder="Search launch videos"
           aria-label="Search launch videos"
+          role="combobox"
+          aria-expanded={query.length > 0}
           aria-controls={query ? "video-search-results" : undefined}
+          aria-activedescendant={
+            query && results.length
+              ? `video-search-option-${results[activeIndex].slug}`
+              : undefined
+          }
         />
         {value ? (
           <button
@@ -99,6 +108,7 @@ export default function VideoSearch({
         <div
           className="search-results"
           id="video-search-results"
+          role="listbox"
           aria-label="Video search results"
         >
           {loading ? (
@@ -107,6 +117,9 @@ export default function VideoSearch({
             results.map((result, index) => (
               <a
                 className={`search-result${index === activeIndex ? " is-active" : ""}`}
+                id={`video-search-option-${result.slug}`}
+                role="option"
+                aria-selected={index === activeIndex}
                 href={`/videos/${result.slug}/`}
                 onMouseEnter={() => setActiveIndex(index)}
                 key={result.slug}
@@ -118,7 +131,11 @@ export default function VideoSearch({
               </a>
             ))
           ) : (
-            <p className="search-results__status">No videos found.</p>
+            <p className="search-results__status">
+              {error
+                ? "Search is unavailable right now."
+                : "No videos found."}
+            </p>
           )}
         </div>
       )}

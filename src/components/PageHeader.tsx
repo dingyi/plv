@@ -27,6 +27,7 @@ export default function PageHeader({
   const [searchQuery, setSearchQuery] = useState("");
   const [searchItems, setSearchItems] = useState<VideoSearchItem[]>([]);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [searchError, setSearchError] = useState(false);
   const [ready, setReady] = useState(false);
 
   const openSearch = useCallback(() => {
@@ -58,6 +59,7 @@ export default function PageHeader({
     if (homeSearch || !searchOpen || searchItems.length) return;
     let ignore = false;
     setSearchLoading(true);
+    setSearchError(false);
     fetch("/search-index.json")
       .then((response) => {
         if (!response.ok) throw new Error("Search index unavailable");
@@ -67,7 +69,10 @@ export default function PageHeader({
         if (!ignore) setSearchItems(items);
       })
       .catch(() => {
-        if (!ignore) setSearchItems([]);
+        if (!ignore) {
+          setSearchItems([]);
+          setSearchError(true);
+        }
       })
       .finally(() => {
         if (!ignore) setSearchLoading(false);
@@ -158,6 +163,7 @@ export default function PageHeader({
             onValueChange={setSearchQuery}
             onClose={() => setSearchOpen(false)}
             loading={searchLoading}
+            error={searchError}
           />
         </DialogContent>
       </Dialog>

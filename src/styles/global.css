@@ -88,7 +88,8 @@
   --destructive: #ef4444;
   --destructive-light: #fef2f2;
   --destructive-foreground: #fafafa;
-  --focus-ring: #6b97ff;
+  /* Darker than the dark-mode ring so the 1px outline clears 3:1 on paper */
+  --focus-ring: #4f7bff;
   --radius: 0.375rem;
 
   --overlay: 0 0 0;
@@ -167,6 +168,7 @@
     --input: var(--n-300);
     --destructive: #f87171;
     --destructive-light: #450a0a;
+    --focus-ring: #6b97ff;
 
     --overlay: 255 255 255;
     --hover: rgb(255 255 255 / 0.06);
@@ -233,6 +235,7 @@
   --input: var(--n-300);
   --destructive: #ef4444;
   --destructive-light: #fef2f2;
+  --focus-ring: #4f7bff;
 
   --overlay: 0 0 0;
   --hover: rgb(0 0 0 / 0.04);
@@ -297,6 +300,7 @@
   --input: var(--n-300);
   --destructive: #f87171;
   --destructive-light: #450a0a;
+  --focus-ring: #6b97ff;
 
   --overlay: 255 255 255;
   --hover: rgb(255 255 255 / 0.06);
@@ -406,23 +410,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-button,
-input,
-textarea {
-  font: inherit;
-}
-button {
-  color: inherit;
-}
 a {
   color: inherit;
   text-decoration: none;
 }
+/* Resets live in @layer base so utility layers (e.g. .text-background on the
+   shared Button) can still override them — unlayered resets always win. */
 @layer base {
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+  button {
+    color: inherit;
+  }
   :focus-visible {
     outline: 1px solid var(--focus-ring, #6b97ff);
     outline-offset: 2px;
-    border-radius: var(--shape-input-radius, 8px);
+    border-radius: var(--shape-input-radius, 0);
   }
   a:focus-visible {
     border-radius: 2px;
@@ -643,47 +649,6 @@ img {
   line-height: 1.55;
   text-transform: uppercase;
   text-wrap: balance;
-}
-.hero__subscribe {
-  display: flex;
-  width: min(428px, 100%);
-  height: 40px;
-  align-items: center;
-  margin-top: 20px;
-  overflow: hidden;
-  padding: 0 12px;
-  border: 0.5px solid var(--grid-line);
-  border-radius: 0;
-  background: var(--card);
-}
-.hero__subscribe input {
-  min-width: 0;
-  height: 100%;
-  flex: 1;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: var(--foreground);
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-.hero__subscribe input::placeholder {
-  color: var(--muted-foreground);
-  opacity: 1;
-}
-.hero__subscribe button {
-  height: 100%;
-  flex: 0 0 auto;
-  border: 0;
-  background: transparent;
-  padding: 0 0 0 16px;
-  color: var(--foreground);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  cursor: pointer;
 }
 
 /* Noiced pattern: outer container padding (16px) + max-width, grid gap:0 inside */
@@ -1153,23 +1118,6 @@ img {
   color: var(--muted-foreground);
   font-size: 13px;
 }
-.notice-dialog {
-  max-width: 400px;
-  padding: 28px !important;
-}
-.notice-dialog h2,
-.notice-dialog [data-slot="dialog-title"] {
-  max-width: 300px;
-  font-size: 25px;
-  line-height: 1.1;
-  letter-spacing: -0.035em;
-}
-.notice-dialog p,
-.notice-dialog [data-slot="dialog-description"] {
-  max-width: 340px;
-  line-height: 1.5;
-}
-
 .site-footer {
   display: flex;
   margin: clamp(64px, 10vw, 120px) 16px 0;
@@ -1345,10 +1293,10 @@ img {
 .detail-profile h1 {
   max-width: 624px;
   margin: 28px auto 0;
-  font-size: clamp(48px, 5vw, 64px);
+  font-size: clamp(24px, 3vw, 30px);
   font-weight: 480;
-  letter-spacing: -0.06em;
-  line-height: 0.96;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   text-wrap: balance;
 }
 .detail-facts {
@@ -1473,9 +1421,6 @@ img {
     font-size: 16px;
     line-height: 24px;
   }
-  .hero__subscribe {
-    width: 100%;
-  }
   .directory {
     padding: 16px;
     padding-bottom: 24px;
@@ -1540,7 +1485,7 @@ img {
   }
   .detail-profile h1 {
     margin-top: 24px;
-    font-size: 42px;
+    font-size: 26px;
   }
   .detail-facts {
     margin-top: 32px;
@@ -1680,45 +1625,60 @@ img {
 .detail-play-link:hover {
   background: rgb(0 0 0 / 28%);
 }
-.detail-play-link span {
+/* Same affordance as the grid card: 42px square play + duration chip */
+.detail-player__play {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 0.5px solid rgb(255 255 255 / 35%);
+  border-radius: 0;
+  background: rgb(0 0 0 / 55%);
+  color: #fafafa;
+  transition: background 140ms ease;
+}
+.detail-play-link:hover .detail-player__play {
+  background: rgb(0 0 0 / 72%);
+}
+.detail-play-link .video-card__duration {
+  pointer-events: none;
+}
+.detail-player__video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--n-950);
+}
+.detail-player__status {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  justify-items: center;
+  padding: 24px;
+  background: rgb(0 0 0 / 55%);
+  color: #fafafa;
+  font-size: 14px;
+  text-align: center;
+  pointer-events: none;
+}
+.detail-player__status--error {
+  background: rgb(0 0 0 / 82%);
+  pointer-events: auto;
+}
+.detail-player__status a {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  height: 42px;
-  padding: 0 16px;
-  border: 0.5px solid var(--grid-line);
-  border-radius: 0;
-  background: var(--card);
-  color: var(--foreground);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-/* X oEmbed */
-.tweet-embed {
-  width: min(624px, 100%);
-  margin: 0 auto;
-  text-align: left;
-}
-.tweet-embed__frame {
-  min-height: 280px;
-}
-.tweet-embed__frame .twitter-tweet {
-  margin: 0 auto !important;
-}
-.tweet-embed__fallback {
-  margin: 12px 0 0;
-  color: var(--n-500);
-  font-size: 12px;
-  line-height: 18px;
-  text-align: center;
-}
-.tweet-embed__fallback a {
-  color: var(--foreground);
+  gap: 6px;
+  color: #fafafa;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+.detail-player__spinner {
+  animation: plv-spin 0.9s linear infinite;
 }
 .detail-logo img {
   width: 100%;
@@ -2189,6 +2149,47 @@ a.nav-submit {
     opacity: 1;
     visibility: visible;
     transform: none;
+  }
+}
+.video-player-modal__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 45%);
+  color: #fafafa;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-50%);
+  transition:
+    opacity var(--duration-fast) var(--ease-smooth-out),
+    background var(--duration-quick) var(--ease-out),
+    visibility var(--duration-fast);
+}
+.video-player-modal__nav--prev {
+  left: 12px;
+}
+.video-player-modal__nav--next {
+  right: 12px;
+}
+.video-player-modal__stage:hover .video-player-modal__nav,
+.video-player-modal__stage:focus-within .video-player-modal__nav {
+  opacity: 1;
+  visibility: visible;
+}
+.video-player-modal__nav:hover {
+  background: rgb(0 0 0 / 68%);
+}
+@media (hover: none), (pointer: coarse) {
+  .video-player-modal__nav {
+    opacity: 1;
+    visibility: visible;
   }
 }
 .video-player-modal__heading {
