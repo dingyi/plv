@@ -17722,5 +17722,31 @@
     "durationSeconds": 80,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-loora",
+    "slug": "loora",
+    "title": "Loora — an open-source design tool your agents control",
+    "product": "Loora",
+    "company": "Loora",
+    "description": "An open-source design tool where your agents have full control: self-host it, fork it. Version history, branches, and one-way export to React/HTML.",
+    "category": "design",
+    "tags": [
+      "loora",
+      "open-source",
+      "design",
+      "agents"
+    ],
+    "tweetUrl": "https://x.com/lassejv/status/2083204316995658128",
+    "tweetId": "2083204316995658128",
+    "authorName": "Lasse",
+    "authorHandle": "lassejv",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2081043442302349312/U1Ot7zNY_400x400.jpg",
+    "poster": "/posters/loora.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2083204188197052416/vid/avc1/1920x1080/C3OwdXrcaRBJeB3W.mp4",
+    "publishedAt": "2026-07-31T14:53:07.000Z",
+    "durationSeconds": 22,
+    "featured": false,
+    "status": "published"
   }
 ]
