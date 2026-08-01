@@ -21,7 +21,7 @@ Open [http://localhost:4321](http://localhost:4321).
 | `pnpm preview` | Preview the production build |
 | `pnpm check` | Astro + TypeScript check |
 | `pnpm test:run` | Unit tests (Vitest) |
-| `pnpm posters:capture` | Download amplify MP4s, extract posters, and build local `/streams` for dev playback |
+| `pnpm posters:capture` | Download amplify MP4s and extract 1440w + 960w posters (streams are no longer generated) |
 | `pnpm discovery:dry-run` | Scan X watchlist (needs `X_BEARER_TOKEN`) and print candidates without filing issues |
 | `pnpm discovery:fixture` | Run discovery against the sample fixture (no API key) |
 | `pnpm discovery:seed-inbox` | Seed `src/data/inbox.json` from the fixture (for `/admin` demos) |

@@ -1,6 +1,6 @@
-# Product Launch Videos
+# whatships.com
 
-plv is a visual directory for discovering product launch videos from X, inspecting concise metadata, and opening the original post.
+whatships.com is a visual directory for discovering startup launch videos from X, inspecting concise metadata, and opening the original post.
 
 ## Language
 
@@ -13,7 +13,7 @@ The primary visual for a Launch Video—a 16:9 frame used on cards and detail pa
 _Avoid_: thumbnail from remote hotlink only, random stock photo
 
 **Category**:
-A single editorial taxonomy label used for filtering: AI, Developer tools, Design, Productivity, Consumer, Hardware, Other.
+A single editorial taxonomy label used for filtering: AI, Developer tools, Design, Motion (non-launch films), Productivity, Consumer, Hardware, Other.
 _Avoid_: free-form tags as primary filters
 
 **Published Video**:

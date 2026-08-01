@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 /**
- * Capture 16:9 WebP posters and compressed same-origin streams from amplify MP4s.
+ * Capture 16:9 WebP posters from amplify MP4s.
+ *
+ * Playback goes through the video proxy (PUBLIC_VIDEO_PROXY_BASE), so local
+ * same-origin streams are no longer generated here.
  *
  * Usage:
  *   node scripts/capture-posters.mjs
@@ -14,7 +17,6 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const videosPath = path.join(root, "src/data/videos.json");
 const postersDir = path.join(root, "public/posters");
-const streamsDir = path.join(root, "public/streams");
 const tmpDir = path.join(root, ".tmp/poster-capture");
 
 const args = new Set(process.argv.slice(2));
@@ -52,17 +54,14 @@ async function capture(video) {
     ? video.poster.slice(1)
     : video.poster;
   const posterAbs = path.join(root, "public", posterRel.replace(/^public\//, ""));
-  const streamAbs = path.join(streamsDir, `${video.slug}.mp4`);
 
   const needPoster = force || !(await exists(posterAbs));
-  const needStream = force || !(await exists(streamAbs));
-  if (!needPoster && !needStream) {
+  if (!needPoster) {
     console.log(`keep ${video.slug}`);
     return;
   }
 
   await mkdir(path.dirname(posterAbs), { recursive: true });
-  await mkdir(streamsDir, { recursive: true });
   await mkdir(tmpDir, { recursive: true });
   const tmpMp4 = path.join(tmpDir, `${video.slug}.mp4`);
 
@@ -78,65 +77,38 @@ async function capture(video) {
     video.videoUrl,
   ]);
 
-  if (needPoster) {
-    const seek =
-      video.durationSeconds && video.durationSeconds > 6
-        ? "00:00:02.5"
-        : "00:00:00.8";
-    console.log(`poster ${video.slug} @ ${seek}`);
-    await run("ffmpeg", [
-      "-y",
-      "-ss",
-      seek,
-      "-i",
-      tmpMp4,
-      "-frames:v",
-      "1",
-      "-vf",
-      "scale=1440:810:force_original_aspect_ratio=increase,crop=1440:810",
-      "-c:v",
-      "libwebp",
-      "-quality",
-      "82",
-      posterAbs,
-    ]);
-    // Grid-sized variant for responsive <img srcset> (cards render ~420px).
-    await run("ffmpeg", [
-      "-y",
-      "-i",
-      posterAbs,
-      "-vf",
-      "scale=960:-2",
-      "-q:v",
-      "80",
-      posterAbs.replace(/\.webp$/, "-960.webp"),
-    ]);
-  }
-
-  if (needStream) {
-    console.log(`stream ${video.slug}`);
-    // Re-encode a lean progressive MP4 for reliable same-origin playback.
-    await run("ffmpeg", [
-      "-y",
-      "-i",
-      tmpMp4,
-      "-vf",
-      "scale='min(1280,iw)':-2",
-      "-c:v",
-      "libx264",
-      "-preset",
-      "veryfast",
-      "-crf",
-      "28",
-      "-c:a",
-      "aac",
-      "-b:a",
-      "96k",
-      "-movflags",
-      "+faststart",
-      streamAbs,
-    ]);
-  }
+  const seek =
+    video.durationSeconds && video.durationSeconds > 6
+      ? "00:00:02.5"
+      : "00:00:00.8";
+  console.log(`poster ${video.slug} @ ${seek}`);
+  await run("ffmpeg", [
+    "-y",
+    "-ss",
+    seek,
+    "-i",
+    tmpMp4,
+    "-frames:v",
+    "1",
+    "-vf",
+    "scale=1440:810:force_original_aspect_ratio=increase,crop=1440:810",
+    "-c:v",
+    "libwebp",
+    "-quality",
+    "82",
+    posterAbs,
+  ]);
+  // Grid-sized variant for responsive <img srcset> (cards render ~420px).
+  await run("ffmpeg", [
+    "-y",
+    "-i",
+    posterAbs,
+    "-vf",
+    "scale=960:-2",
+    "-q:v",
+    "80",
+    posterAbs.replace(/\.webp$/, "-960.webp"),
+  ]);
 }
 
 const videos = JSON.parse(await readFile(videosPath, "utf8"));
@@ -150,7 +122,6 @@ if (!targets.length) {
 }
 
 await mkdir(postersDir, { recursive: true });
-await mkdir(streamsDir, { recursive: true });
 
 for (const video of targets) {
   try {

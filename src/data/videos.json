@@ -17618,5 +17618,83 @@
     "durationSeconds": 39,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-superwhisper-grok-build",
+    "slug": "superwhisper-grok-build",
+    "title": "superwhisper × Grok Build — keep a tab on your agents from anywhere",
+    "product": "superwhisper",
+    "company": "superwhisper",
+    "description": "Keep a tab on your agents from anywhere — superwhisper's integration is now live in Grok Build.",
+    "category": "ai",
+    "tags": [
+      "superwhisper",
+      "grok",
+      "agents"
+    ],
+    "tweetUrl": "https://x.com/superwhisper/status/2083285646387433827",
+    "tweetId": "2083285646387433827",
+    "authorName": "superwhisper",
+    "authorHandle": "superwhisper",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2059688992715534337/Hl9aVUmY.jpg",
+    "poster": "/posters/superwhisper-grok-build.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2083284675028500480/vid/avc1/3840x2160/3Wforh_48NJ35qhP.mp4",
+    "publishedAt": "2026-07-31T20:16:18.000Z",
+    "durationSeconds": 26,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-the-looking-glass",
+    "slug": "the-looking-glass",
+    "title": "The Looking Glass — spatiotemporal AI image + video engine",
+    "product": "The Looking Glass",
+    "company": "The Looking Glass",
+    "description": "Traverse the history of the world through the eyes of multimodal models — anytime, anywhere, any style.",
+    "category": "ai",
+    "tags": [
+      "the-looking-glass",
+      "pliny",
+      "multimodal",
+      "image",
+      "video"
+    ],
+    "tweetUrl": "https://x.com/elder_plinius/status/2083294017492816192",
+    "tweetId": "2083294017492816192",
+    "authorName": "Pliny the Liberator 🐉",
+    "authorHandle": "elder_plinius",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1657057194737557507/5ZQtKHwd.jpg",
+    "poster": "/posters/the-looking-glass.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2083288223749713920/vid/avc1/3456x1994/xBqXvhLia6Yuc3ZP.mp4",
+    "publishedAt": "2026-07-31T20:49:34.000Z",
+    "durationSeconds": 73,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-mintlify-widget",
+    "slug": "mintlify-widget",
+    "title": "Mintlify Widget — an embedded agent that supports your users anywhere",
+    "product": "Mintlify Widget",
+    "company": "Mintlify",
+    "description": "Meet the Widget: an embedded agent that supports your users anywhere on your site. Give it access to your docs, help center, and tools with a single script.",
+    "category": "developer-tools",
+    "tags": [
+      "mintlify",
+      "widget",
+      "docs",
+      "agent"
+    ],
+    "tweetUrl": "https://x.com/mintlify/status/2083287787135185192",
+    "tweetId": "2083287787135185192",
+    "authorName": "Mintlify",
+    "authorHandle": "mintlify",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2007938629797310464/XmtD5CZz.jpg",
+    "poster": "/posters/mintlify-widget.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2083287574656016384/vid/avc1/3840x2160/LJJ2UEMt5fPAZNHN.mp4",
+    "publishedAt": "2026-07-31T20:24:48.000Z",
+    "durationSeconds": 23,
+    "featured": false,
+    "status": "published"
   }
 ]

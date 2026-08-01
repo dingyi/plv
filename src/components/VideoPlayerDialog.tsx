@@ -19,7 +19,8 @@ interface Props {
 type PlayerStatus = "idle" | "loading" | "ready" | "error";
 
 /**
- * Play launch videos from same-origin streams under /public/streams.
+ * Play launch videos in-site via the playback URL from `playbackUrl()`
+ * (the video proxy wrapping the original X CDN URL).
  *
  * Direct X CDN URLs are unreliable in browsers: video.twimg.com returns 403
  * for non-Twitter Referer headers (including localhost and production domains),
@@ -128,7 +129,7 @@ export default function VideoPlayerDialog({
       if (cancelled) return;
       setStatus("error");
       setErrorMessage(
-        "This local stream is missing or unreadable. Open the original X post, or run pnpm posters:capture to rebuild streams.",
+        "This video is missing or unreadable. Open the original X post instead.",
       );
     };
 
