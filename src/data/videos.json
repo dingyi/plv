@@ -24355,5 +24355,31 @@
     "durationSeconds": 57,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-teable",
+    "slug": "teable",
+    "title": "Teable — migrate 100% of your Airtable base",
+    "product": "Teable",
+    "company": "Teable",
+    "description": "As Bending Spoons agrees to acquire Airtable for $1.285B, Teable's #ConnectEverything migrates 100% of your Airtable base — no CSVs, no rebuild.",
+    "category": "productivity",
+    "tags": [
+      "teable",
+      "airtable",
+      "database",
+      "migration"
+    ],
+    "tweetUrl": "https://x.com/teableio/status/2084840396446974244",
+    "tweetId": "2084840396446974244",
+    "authorName": "Teable",
+    "authorHandle": "teableio",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1723351238023008256/muaavBin_400x400.jpg",
+    "poster": "/posters/teable.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2084838531034468352/vid/avc1/1920x1080/xXE_-O7smnfRGs1F.mp4",
+    "publishedAt": "2026-08-05T03:14:19.000Z",
+    "durationSeconds": 31,
+    "featured": false,
+    "status": "published"
   }
 ]
