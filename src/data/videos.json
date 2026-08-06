@@ -24612,5 +24612,31 @@
     "durationSeconds": 145,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-not-diamond-code",
+    "slug": "not-diamond-code",
+    "title": "Not Diamond Code — an intelligent model router for long-horizon coding agents",
+    "product": "Not Diamond Code",
+    "company": "Not Diamond",
+    "description": "Announcing Not Diamond Code, an intelligent model router for long-horizon coding agents. Works with any gateway or harness, including Claude Code, to select the best model and reasoning effort for each step — reducing costs by 20-65%.",
+    "category": "developer-tools",
+    "tags": [
+      "not-diamond",
+      "model-router",
+      "coding-agents",
+      "claude-code"
+    ],
+    "tweetUrl": "https://x.com/tomas_hk/status/2084669945150062619",
+    "tweetId": "2084669945150062619",
+    "authorName": "Tomas Hernando Kofman",
+    "authorHandle": "tomas_hk",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2059478298791686144/WV3U2VKB.jpg",
+    "poster": "/posters/not-diamond-code.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2084667135348051968/vid/avc1/2048x1152/cUxl8WX3AcYNK1D1.mp4",
+    "publishedAt": "2026-08-04T15:57:00.000Z",
+    "durationSeconds": 31,
+    "featured": false,
+    "status": "published"
   }
 ]
