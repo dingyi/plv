@@ -24586,5 +24586,31 @@
     "durationSeconds": 20,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-act-2-preview",
+    "slug": "act-2-preview",
+    "title": "ACT-2 Preview — a robotics model unifying generalization with reliability",
+    "product": "ACT-2 Preview",
+    "company": "Sunday Robotics",
+    "description": "Introducing ACT-2 Preview: the first robotics model to unify broad generalization with high reliability. A single fine-tuning example can teach Memo a new behavior that generalizes — zero shot, real unseen homes, 99% success rate.",
+    "category": "ai",
+    "tags": [
+      "act-2",
+      "robotics",
+      "memo",
+      "sunday-robotics"
+    ],
+    "tweetUrl": "https://x.com/tonyzzhao/status/2077806003308179802",
+    "tweetId": "2077806003308179802",
+    "authorName": "Tony Zhao",
+    "authorHandle": "tonyzzhao",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1989853987458400256/k-l_tMCT.jpg",
+    "poster": "/posters/act-2-preview.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2077799462450438144/vid/avc1/1920x1080/04zbTsnwKo1StL5W.mp4",
+    "publishedAt": "2026-07-16T17:22:09.000Z",
+    "durationSeconds": 145,
+    "featured": false,
+    "status": "published"
   }
 ]
