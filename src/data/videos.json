@@ -24638,5 +24638,59 @@
     "durationSeconds": 31,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-databricks-developers-brand-reel",
+    "slug": "databricks-developers-brand-reel",
+    "title": "Databricks Developers — branding & design reel",
+    "product": "Databricks Developers",
+    "company": "Pixel Point",
+    "description": "A reel from Pixel Point's recently released branding and design work for developers.databricks.com.",
+    "category": "motion",
+    "tags": [
+      "databricks",
+      "branding",
+      "design",
+      "reel",
+      "pixel-point"
+    ],
+    "authorName": "Alex Barashkov",
+    "authorHandle": "alex_barashkov",
+    "tweetUrl": "https://x.com/alex_barashkov/status/2084313374393835699",
+    "tweetId": "2084313374393835699",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/1184409305321279489/6jCcvCIL.jpg",
+    "poster": "/posters/databricks-developers-brand-reel.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2084312850378391552/vid/avc1/3840x2160/cLJxsWrzNTynBbOn.mp4",
+    "publishedAt": "2026-08-03T16:20:07.000Z",
+    "durationSeconds": 30,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-databricks-omnigent",
+    "slug": "databricks-omnigent",
+    "title": "Omnigent — an open source AI meta-harness for agent workflows",
+    "product": "Omnigent",
+    "company": "Databricks",
+    "description": "Omnigent is an open source AI meta-harness that gives teams one place to compose, control, and collaborate across agent workflows — bringing together coding agents including Codex, Claude, Cursor, Pi, Antigravity, and custom agents, with dynamic guardrails.",
+    "category": "developer-tools",
+    "tags": [
+      "omnigent",
+      "databricks",
+      "agents",
+      "open-source",
+      "orchestration"
+    ],
+    "authorName": "Databricks",
+    "authorHandle": "databricks",
+    "tweetUrl": "https://x.com/databricks/status/2084649668365914298",
+    "tweetId": "2084649668365914298",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2070268421615333376/SZUvhQiQ.jpg",
+    "poster": "/posters/databricks-omnigent.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2084649563621613568/vid/avc1/1280x720/CctQwrWVHVwtecuw.mp4?tag=14",
+    "publishedAt": "2026-08-04T14:36:26.000Z",
+    "durationSeconds": 79,
+    "featured": false,
+    "status": "published"
   }
 ]
