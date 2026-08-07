@@ -1,6 +1,8 @@
 import type { LaunchVideo } from "@/lib/catalog";
 
-export const PAGE_SIZE = 64;
+// 60 divides evenly by 3, 4, 5, and 6 columns, so a full page never leaves
+// a trailing empty cell in the grid at any common viewport width.
+export const PAGE_SIZE = 60;
 
 export function filterVideos(
   videos: LaunchVideo[],
