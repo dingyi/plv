@@ -24692,5 +24692,83 @@
     "durationSeconds": 79,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-explabsai-yc-launch",
+    "slug": "explabsai-yc-launch",
+    "title": "Experiential Labs — own the models you train",
+    "product": "Experiential Labs",
+    "company": "Experiential Labs",
+    "description": "YC S26 launch. Train models you own against your real traffic simulation. Up to 97% cheaper and 50% higher quality than frontier models for your specific use cases.",
+    "category": "ai",
+    "tags": [
+      "yc",
+      "model-training",
+      "agents",
+      "cost"
+    ],
+    "tweetUrl": "https://x.com/silennai/status/2085487746186199503",
+    "tweetId": "2085487746186199503",
+    "authorName": "Silen Naihin",
+    "authorHandle": "silennai",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2008690927380910080/GTKEGJ6W.jpg",
+    "poster": "/posters/explabsai-yc-launch.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2085471092307849216/vid/avc1/1280x720/Xk3IQLfvHymV31Em.mp4",
+    "publishedAt": "2026-08-06T22:06:39.000Z",
+    "durationSeconds": 66,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-slate-prompt-app",
+    "slug": "slate-prompt-app",
+    "title": "SLATE — open-source prompt craft for generators",
+    "product": "SLATE",
+    "company": "Sam Wasserman",
+    "description": "Open-source app that crafts best prompts for any video, image or music generator. Uses your own LLM (subscription or local), presets, image/video refs, MCP. No API keys needed.",
+    "category": "ai",
+    "tags": [
+      "prompts",
+      "open-source",
+      "generative",
+      "mcp"
+    ],
+    "tweetUrl": "https://x.com/SamJWasserman/status/2085469672489799752",
+    "tweetId": "2085469672489799752",
+    "authorName": "Sam Wasserman",
+    "authorHandle": "SamJWasserman",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2079299594715070464/3iiGUf5Y.jpg",
+    "poster": "/posters/slate-prompt-app.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2085469584543588352/vid/avc1/1920x1080/dG4wT1YgpckIEiRJ.mp4",
+    "publishedAt": "2026-08-06T20:54:50.000Z",
+    "durationSeconds": 43,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "id": "plv-metamask-agent-wallet",
+    "slug": "metamask-agent-wallet",
+    "title": "MetaMask Agent Wallet — your agent finally gets its own wallet",
+    "product": "MetaMask Agent Wallet",
+    "company": "MetaMask",
+    "description": "Your agent finally gets its own wallet. MetaMask Agent Wallet is now live for everyone.",
+    "category": "consumer",
+    "tags": [
+      "metamask",
+      "wallet",
+      "agents",
+      "crypto"
+    ],
+    "tweetUrl": "https://x.com/MetaMask/status/2085365793441685614",
+    "tweetId": "2085365793441685614",
+    "authorName": "MetaMask 🦊",
+    "authorHandle": "MetaMask",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2079082606717779969/DcvmQxfE.jpg",
+    "poster": "/posters/metamask-agent-wallet.webp",
+    "videoUrl": "https://video.twimg.com/ext_tw_video/2085365775087304704/pu/vid/avc1/1280x720/FSrL15c1Cb7aK7o8.mp4?tag=12",
+    "publishedAt": "2026-08-06T14:02:04.000Z",
+    "durationSeconds": 15,
+    "featured": false,
+    "status": "published"
   }
 ]
