@@ -30438,5 +30438,31 @@
     "durationSeconds": 9,
     "featured": false,
     "status": "published"
+  },
+  {
+    "id": "plv-claude-code-session-messaging",
+    "slug": "claude-code-session-messaging",
+    "title": "Claude Code — sessions can now message each other",
+    "product": "Claude Code",
+    "company": "Anthropic",
+    "description": "New in Claude Code: your sessions can now message each other. Tell Claude to send a summary (not your history or files), and the other session picks it up mid-task.",
+    "category": "developer-tools",
+    "tags": [
+      "claude-code",
+      "anthropic",
+      "agents",
+      "sessions"
+    ],
+    "tweetUrl": "https://x.com/ClaudeDevs/status/2085817074816070014",
+    "tweetId": "2085817074816070014",
+    "authorName": "ClaudeDevs",
+    "authorHandle": "ClaudeDevs",
+    "authorAvatar": "https://pbs.twimg.com/profile_images/2044472418815893504/xf14RxM8.png",
+    "poster": "/posters/claude-code-session-messaging.webp",
+    "videoUrl": "https://video.twimg.com/amplify_video/2085813483652976641/vid/avc1/2400x1260/qEQfV5mSw44qtsnQ.mp4",
+    "publishedAt": "2026-08-07T19:55:17.000Z",
+    "durationSeconds": 16,
+    "featured": false,
+    "status": "published"
   }
 ]
